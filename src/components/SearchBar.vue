@@ -1,9 +1,9 @@
 <template>
   <input
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
     placeholder="Search links..."
     class="form-control my-3"
+    @input="$emit('update:modelValue', $event.target.value)"
   />
 </template>
 

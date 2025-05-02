@@ -14,12 +14,12 @@ export function useLinks(userId) {
   };
 
   const deleteLink = (id) => {
-    links.value = links.value.filter(link => link.id !== id);
+    links.value = links.value.filter((link) => link.id !== id);
     saveLinks();
   };
 
   const updateLink = (updatedLink) => {
-    const index = links.value.findIndex(link => link.id === updatedLink.id);
+    const index = links.value.findIndex((link) => link.id === updatedLink.id);
     if (index !== -1) {
       links.value[index] = updatedLink;
       saveLinks();
