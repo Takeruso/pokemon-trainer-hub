@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>Welcome, {{ currentUser }}! This page is only for logged-in users.</p>
     <LinkForm :initial-data="newLink" @save="addLink" />
     <SearchBar v-model="searchQuery" />
 
@@ -10,6 +11,9 @@
 </template>
 
 <script setup>
+import { useAuth } from '@/composables/useAuth';
+
+const { currentUser } = useAuth();
 import { ref, computed } from 'vue';
 import { useLinks } from '../composables/useLinks';
 import LinkForm from '../components/LinkForm.vue';

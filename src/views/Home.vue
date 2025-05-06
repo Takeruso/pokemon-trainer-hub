@@ -1,34 +1,24 @@
 <template>
-  <div class="container mt-4">
-    <h1>Welcome to the Weather App!</h1>
+  <div>
+    <h1>Pokémon Trainer Hub</h1>
     <p>
-      This application provides you with the latest weather updates and news.
+      Welcome, Trainer! Here you can explore your favorite Pokémon, check their
+      stats, and prepare for your next big battle.
     </p>
-
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <!-- <img
-          src="/src/assets/weather1.jpg"
-          class="img-fluid"
-          alt="Weather Image 1"
-        /> -->
-      </div>
-      <div class="col-md-6 mb-3">
-        <!-- <img
-          src="/src/assets/weather2.jpg"
-          class="img-fluid"
-          alt="Weather Image 2"
-        /> -->
-      </div>
+    <img
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+      alt="Pikachu"
+      width="200"
+    />
+    <div style="margin-top: 20px">
+      <router-link to="/login">
+        <button>Log In</button>
+      </router-link>
+      <router-link to="/signup" style="margin-left: 10px">
+        <button>Sign Up</button>
+      </router-link>
     </div>
   </div>
 </template>
 
-<style scoped>
-h1 {
-  color: #42b983;
-}
-p {
-  font-size: 1.2em;
-}
-</style>
+<script setup></script>

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "AI Revolution Shakes Tech World",
+    "summary": "Artificial intelligence is transforming industries at a rapid pace."
+  },
+  {
+    "id": 2,
+    "title": "SpaceX Launches New Rocket",
+    "summary": "SpaceX successfully launched its latest Falcon rocket into orbit."
+  },
+  {
+    "id": 3,
+    "title": "Global Climate Change Updates",
+    "summary": "New data shows rising sea levels and temperature records worldwide."
+  },
+  {
+    "id": 4,
+    "title": "Breakthrough in Cancer Research",
+    "summary": "Scientists have discovered a promising new therapy for cancer treatment."
+  },
+  {
+    "id": 5,
+    "title": "Sports: Major League Finals Recap",
+    "summary": "The championship game ended in a dramatic overtime victory."
+  }
+]

@@ -1,21 +1,28 @@
-<script setup></script>
+<script setup>
+// import AuthTest from './components/AuthTest.vue';
+// import { useAuth } from '@/composables/useAuth';
+// const { isLoggedIn } = useAuth();
+</script>
 
 <template>
+  <AuthTest />
+
   <div>
     <nav>
       <router-link to="/">Home</router-link> |
-      <!-- <router-link to="/dashboard">Dashboard</router-link> | -->
       <router-link to="/news">News</router-link> |
       <router-link to="/about">About</router-link>
+      <span v-if="isLoggedIn">
+        | <router-link to="/dashboard">Dashboard</router-link>
+      </span>
     </nav>
 
-    <!-- ページコンポーネントを表示する場所 -->
     <router-view />
   </div>
 </template>
 
 <style scoped>
-nav {
+/* nav {
   padding: 1em;
 }
 nav a {
@@ -25,5 +32,7 @@ nav a {
 }
 nav a.router-link-exact-active {
   font-weight: bold;
-}
+} */
 </style>
+
+<!-- 7b5e2c4017154db19bf82d3581f02303 -->
