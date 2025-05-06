@@ -36,13 +36,4 @@ const newLink = ref({ name: '', url: '', important: false });
 const editLink = (link) => {
   newLink.value = { ...link };
 };
-
-// const addLinkHandler = (link) => {
-//   if (link.id) {
-//     updateLink(link);
-//   } else {
-//     addLink(link);
-//   }
-//   newLink.value = { name: '', url: '', important: false };
-// };
 </script>

@@ -7,7 +7,7 @@
 <template>
   <AuthTest />
 
-  <div>
+  <div class="main-content">
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/news">News</router-link> |

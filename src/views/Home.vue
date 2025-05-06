@@ -12,13 +12,27 @@
     />
     <div style="margin-top: 20px">
       <router-link to="/login">
-        <button>Log In</button>
+        <button>🔑 Log In</button>
       </router-link>
       <router-link to="/signup" style="margin-left: 10px">
-        <button>Sign Up</button>
+        <button>📝 Sign Up</button>
       </router-link>
     </div>
   </div>
 </template>
 
 <script setup></script>
+
+<style scoped>
+.main-content {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 50px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 3px solid #1e3a8a;
+}
+</style>
