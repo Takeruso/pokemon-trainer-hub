@@ -229,7 +229,7 @@ img {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--background-dark);
     color: var(--text-dark);
@@ -242,4 +242,4 @@ img {
   button {
     background-color: var(--secondary-color);
   }
-}
+} */

@@ -21,6 +21,12 @@
     "rules": {
       "prettier/prettier": "error",
       "vue/multi-word-component-names": "off"
+    },
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]
+      }
     }
   }
   

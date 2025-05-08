@@ -6,6 +6,10 @@ import 'bootstrap';
 import { createPinia } from 'pinia';
 import './style.css';
 
-createApp(App).use(router).mount('#app');
+const app = createApp(App);
 const pinia = createPinia();
-App.use(pinia);
+
+app.use(router);
+app.use(pinia);
+
+app.mount('#app');

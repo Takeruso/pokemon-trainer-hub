@@ -18,17 +18,27 @@
       />
     </div>
     <div style="margin-top: 20px">
-      <router-link to="/login">
-        <button>🔑 Log In</button>
-      </router-link>
-      <router-link to="/signup" style="margin-left: 10px">
+      <RouterLink to="/Login"> <button>🔑 Log In</button></RouterLink>
+      <RouterLink to="/Signup" style="margin-left: 10px">
         <button>📝 Sign Up</button>
-      </router-link>
+      </RouterLink>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+import LoginModal from '../components/LoginModal.vue';
+import { RouterLink } from 'vue-router';
+
+// import SignupModal from '@/components/SignupModal.vue';
+// import { useAuth } from '@/composables/useAuth';
+// const { login, register, logout, isLoggdeIn, currentUser } = useAuth();
+
+// const { isLoggedIn } = useAuth();
+const showLogin = ref(false);
+// const showSignup = ref(false);
+</script>
 
 <style scoped>
 .main-content {
@@ -56,6 +66,11 @@
 
 .image-container img {
   width: 200px;
+}
+
+.error {
+  color: red;
+  margin: 0.5rem 0;
 }
 
 @media (max-width: 600px) {
