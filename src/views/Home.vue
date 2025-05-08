@@ -5,11 +5,18 @@
       Welcome, Trainer! Here you can explore your favorite Pokémon, check their
       stats, and prepare for your next big battle.
     </p>
-    <img
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
-      alt="Pikachu"
-      width="200"
-    />
+    <div class="image-container">
+      <img
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+        alt="Pikachu"
+        width="200"
+      />
+      <img
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+        alt="Bulbasaur"
+        width="200"
+      />
+    </div>
     <div style="margin-top: 20px">
       <router-link to="/login">
         <button>🔑 Log In</button>
@@ -34,5 +41,33 @@
   margin: 50px auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border: 3px solid #1e3a8a;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-container img {
+  width: 200px;
+}
+
+@media (max-width: 600px) {
+  .image-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 601px) {
+  .image-container {
+    flex-direction: row;
+  }
 }
 </style>

@@ -1,27 +1,122 @@
 [
   {
-    "id": 1,
-    "title": "AI Revolution Shakes Tech World",
-    "summary": "Artificial intelligence is transforming industries at a rapid pace."
+    "date": "2025-05-10",
+    "title": "Pokémon GO Spring Event Begins!",
+    "content": "Celebrate spring with special flower-crowned Pokémon and limited-time bonuses.",
+    "category": "Event"
   },
   {
-    "id": 2,
-    "title": "SpaceX Launches New Rocket",
-    "summary": "SpaceX successfully launched its latest Falcon rocket into orbit."
+    "date": "2025-05-09",
+    "title": "Legendary Raid Weekend Announced",
+    "content": "Battle against powerful legendary Pokémon and earn exclusive rewards.",
+    "category": "Raid"
   },
   {
-    "id": 3,
-    "title": "Global Climate Change Updates",
-    "summary": "New data shows rising sea levels and temperature records worldwide."
+    "date": "2025-05-08",
+    "title": "New Update: Mega Evolutions Expanded",
+    "content": "Mega Evolution mechanics have been updated to improve gameplay experience.",
+    "category": "Update"
   },
   {
-    "id": 4,
-    "title": "Breakthrough in Cancer Research",
-    "summary": "Scientists have discovered a promising new therapy for cancer treatment."
+    "date": "2025-05-07",
+    "title": "Pikachu Outbreak Festival Returns",
+    "content": "Join the Pikachu-themed festivities and catch rare costumed Pikachu.",
+    "category": "Event"
   },
   {
-    "id": 5,
-    "title": "Sports: Major League Finals Recap",
-    "summary": "The championship game ended in a dramatic overtime victory."
+    "date": "2025-05-06",
+    "title": "Shiny Charmander Now Available!",
+    "content": "Shiny Charmander is appearing more frequently in the wild.",
+    "category": "Announcement"
+  },
+  {
+    "date": "2025-05-05",
+    "title": "Pokémon Café ReMix Celebrates Anniversary",
+    "content": "Special login bonuses and events are available to celebrate the anniversary.",
+    "category": "Event"
+  },
+  {
+    "date": "2025-05-04",
+    "title": "Community Day: Bulbasaur Returns!",
+    "content": "Don't miss the chance to catch Bulbasaur with exclusive moves.",
+    "category": "Community"
+  },
+  {
+    "date": "2025-05-03",
+    "title": "Galar Pokémon Join the Battle",
+    "content": "New Pokémon from the Galar region have been added to the game.",
+    "category": "Update"
+  },
+  {
+    "date": "2025-05-02",
+    "title": "New Mythical Pokémon Revealed",
+    "content": "A mysterious new Mythical Pokémon has been announced.",
+    "category": "Reveal"
+  },
+  {
+    "date": "2025-05-01",
+    "title": "Battle League Season 12 Updates",
+    "content": "Season 12 brings new rewards, rankings, and gameplay improvements.",
+    "category": "Update"
+  },
+  {
+    "date": "2025-04-30",
+    "title": "PokéStop Contest Winners Announced",
+    "content": "Check out the creative PokéStop submissions from players worldwide.",
+    "category": "Announcement"
+  },
+  {
+    "date": "2025-04-29",
+    "title": "Trainer Battle Updates Released",
+    "content": "Experience enhanced trainer battles with updated mechanics and visuals.",
+    "category": "Update"
+  },
+  {
+    "date": "2025-04-28",
+    "title": "Egg Hatch Distance Reduced Event",
+    "content": "Hatch eggs faster with this limited-time distance reduction event.",
+    "category": "Event"
+  },
+  {
+    "date": "2025-04-27",
+    "title": "Special Research: Mew Quest Begins",
+    "content": "Embark on an adventure to encounter the elusive Mythical Pokémon, Mew.",
+    "category": "Research"
+  },
+  {
+    "date": "2025-04-26",
+    "title": "Master League Open Until Next Week",
+    "content": "Test your best teams in the ongoing Master League battles.",
+    "category": "Competition"
+  },
+  {
+    "date": "2025-04-25",
+    "title": "Team GO Rocket Strikes Again!",
+    "content": "Team GO Rocket has invaded PokéStops; prepare to battle their leaders.",
+    "category": "Event"
+  },
+  {
+    "date": "2025-04-24",
+    "title": "Ultra Bonus Rewards Unlocked",
+    "content": "Thanks to players' efforts, Ultra Bonus rewards are now live.",
+    "category": "Reward"
+  },
+  {
+    "date": "2025-04-23",
+    "title": "Pokémon Snap Event in GO!",
+    "content": "Celebrate Pokémon Snap with themed events and snapshot challenges.",
+    "category": "Event"
+  },
+  {
+    "date": "2025-04-22",
+    "title": "Sinnoh Celebration Event Starts",
+    "content": "Explore the Sinnoh region with special spawns and bonuses.",
+    "category": "Event"
+  },
+  {
+    "date": "2025-04-21",
+    "title": "Pokémon Unite Adds New Fighters",
+    "content": "Check out the latest fighters joining the Pokémon Unite roster.",
+    "category": "Update"
   }
 ]

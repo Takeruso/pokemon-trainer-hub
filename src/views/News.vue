@@ -1,347 +1,226 @@
 <template>
-  <div class="main-content--pokemon">
-    <h1>Pokémon Spotlight</h1>
+  <div>
+    <h1>Pokémon News</h1>
 
-    <!-- Search input -->
-    <input
-      v-model="searchQuery"
-      class="searchPokemon"
-      placeholder="Search Pokémon..."
-    />
-    <button v-if="searchQuery" @click="clearSearch">Clear Search</button>
-
-    <!-- Loading / error handling -->
-    <div v-if="loading">Loading Pokémon...</div>
-    <div v-else-if="error">{{ error }}</div>
-
-    <!-- Pokémon list -->
-    <div v-else>
-      <div
-        v-for="pokemon in paginatedPokemons"
-        :key="pokemon.name"
-        :class="['pokemon-card', 'border-' + getPrimaryType(pokemon.type)]"
+    <!-- Filters -->
+    <div class="filters">
+      <input v-model="searchTitle" placeholder="Search by title..." />
+      <input v-model="searchContent" placeholder="Search by content..." />
+      <input type="date" v-model="searchDate" placeholder="Date" />
+      <select v-model="selectedCategory">
+        <option value="">All Categories</option>
+        <option
+          v-for="category in uniqueCategories"
+          :key="category"
+          :value="category"
+        >
+          {{ category }}
+        </option>
+      </select>
+      <button
+        v-if="searchTitle || searchContent || searchDate || selectedCategory"
+        class="reset-button"
+        @click="resetFilters"
       >
-        <h3>{{ capitalize(pokemon.name) }}</h3>
-        <img
-          :src="pokemon.image"
-          :alt="`${pokemon.name} image`"
-          class="pokemon-image"
-        />
-        <p class="pokemon-type">Type: {{ pokemon.type }}</p>
+        Clear Search
+      </button>
+    </div>
+
+    <!-- News Cards -->
+    <div
+      v-for="news in paginatedNews"
+      :key="news.title"
+      :class="['pokemon-card', 'border-' + news.category.toLowerCase()]"
+    >
+      <div class="card-header">
+        <h3>{{ news.title }}</h3>
+        <span class="date">{{ news.date }}</span>
       </div>
+      <p><strong>Category:</strong> {{ news.category }}</p>
+      <p>{{ news.content }}</p>
+    </div>
 
-      <!-- Pagination controls -->
-      <div class="pagination-container">
-        <button
-          class="pagination"
-          @click="prevPage"
-          :disabled="currentPage === 1 || loading"
-          aria-label="Previous page"
-        >
-          Prev
-        </button>
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button
+        class="pagination"
+        @click="prevPage"
+        :disabled="currentPage === 1 || loading"
+        aria-label="Previous page"
+      >
+        Prev
+      </button>
 
-        <span class="page-info"
-          >Page {{ currentPage }} of {{ totalPages }}</span
-        >
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
 
-        <button
-          class="pagination"
-          @click="nextPage"
-          :disabled="currentPage === totalPages || loading"
-          aria-label="Next page"
-        >
-          Next
-        </button>
-      </div>
+      <button
+        class="pagination"
+        @click="nextPage"
+        :disabled="currentPage === totalPages || loading"
+        aria-label="Next page"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, computed, watch } from 'vue';
+<script>
+import newsData from '@/assets/news.json';
 
-const pokemons = ref([]);
-const searchQuery = ref('');
-const currentPage = ref(1);
-const itemsPerPage = 6;
-const loading = ref(false);
-const error = ref('');
-const totalPages = ref(100); // Currently hardcoded; ideally calculated dynamically
+export default {
+  data() {
+    return {
+      newsList: [],
+      searchTitle: '',
+      searchContent: '',
+      searchDate: '',
+      selectedCategory: '',
+      currentPage: 1,
+      perPage: 5,
+    };
+  },
+  computed: {
+    uniqueCategories() {
+      const categories = this.newsList.map((news) => news.category);
+      return [...new Set(categories)];
+    },
+    filteredNews() {
+      return this.newsList.filter((news) => {
+        const matchTitle = news.title
+          .toLowerCase()
+          .includes(this.searchTitle.toLowerCase());
+        const matchContent = news.content
+          .toLowerCase()
+          .includes(this.searchContent.toLowerCase());
+        const matchDate =
+          this.searchDate === '' || news.date === this.searchDate;
+        const matchCategory =
+          this.selectedCategory === '' ||
+          news.category === this.selectedCategory;
 
-// Fetches a page of Pokémon (basic info + details)
-async function fetchPokemonPage(offset, limit) {
-  try {
-    loading.value = true;
-    error.value = '';
-
-    const res = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
-    );
-    const data = await res.json();
-
-    const detailedData = await Promise.all(
-      data.results.map(async (item) => {
-        const res = await fetch(item.url);
-        const details = await res.json();
-        return {
-          name: item.name,
-          image: details.sprites.front_default,
-          type: details.types.map((t) => t.type.name).join(', '),
-        };
-      })
-    );
-
-    pokemons.value = detailedData;
-  } catch (err) {
-    console.error('Failed to fetch Pokémon data:', err);
-    error.value = 'Failed to load Pokémon. Please try again later.';
-  } finally {
-    loading.value = false;
-  }
-}
-
-// React to page change
-watch(currentPage, (newPage) => {
-  const offset = (newPage - 1) * itemsPerPage;
-  fetchPokemonPage(offset, itemsPerPage);
-});
-
-// React to search input change
-watch(searchQuery, async (newQuery) => {
-  if (newQuery.trim() === '') {
-    const offset = (currentPage.value - 1) * itemsPerPage;
-    fetchPokemonPage(offset, itemsPerPage);
-  } else {
-    // Load large batch only once for searching
-    if (pokemons.value.length < 1000) {
-      loading.value = true;
-      try {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
-        const data = await res.json();
-        const detailedData = await Promise.all(
-          data.results.map(async (item) => {
-            const res = await fetch(item.url);
-            const details = await res.json();
-            return {
-              name: item.name,
-              image: details.sprites.front_default,
-              type: details.types.map((t) => t.type.name).join(', '),
-            };
-          })
-        );
-        pokemons.value = detailedData;
-      } catch (err) {
-        error.value = 'Failed to load Pokémon.';
-      } finally {
-        loading.value = false;
+        return matchTitle && matchContent && matchDate && matchCategory;
+      });
+    },
+    totalPages() {
+      return Math.ceil(this.filteredNews.length / this.perPage);
+    },
+    paginatedNews() {
+      const start = (this.currentPage - 1) * this.perPage;
+      return this.filteredNews.slice(start, start + this.perPage);
+    },
+  },
+  methods: {
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
       }
-    }
-    currentPage.value = 1;
-  }
-});
-
-// Initial load
-onMounted(() => {
-  fetchPokemonPage(0, itemsPerPage);
-});
-
-// Filter Pokémon by name or type
-const filteredPokemons = computed(() => {
-  return pokemons.value.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      item.type.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
-
-// Pagination logic (note: filteredPokemons already provides search results)
-const paginatedPokemons = computed(() => {
-  return filteredPokemons.value;
-});
-
-// Utilities
-function nextPage() {
-  if (currentPage.value < totalPages.value) currentPage.value++;
-}
-
-function prevPage() {
-  if (currentPage.value > 1) currentPage.value--;
-}
-
-function getPrimaryType(typeString) {
-  return typeString.split(', ')[0].toLowerCase();
-}
-
-function clearSearch() {
-  searchQuery.value = '';
-  currentPage.value = 1;
-  const offset = (currentPage.value - 1) * itemsPerPage;
-  fetchPokemonPage(offset, itemsPerPage);
-}
-
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    resetFilters() {
+      this.searchTitle = '';
+      this.searchContent = '';
+      this.searchDate = '';
+      this.selectedCategory = '';
+      this.currentPage = 1;
+    },
+  },
+  mounted() {
+    this.newsList = newsData;
+  },
+};
 </script>
 
 <style scoped>
-/* Special class to adjust max width only for the Pokémon page */
-.main-content--pokemon {
-  max-width: 1000px;
-  margin: 0 auto;
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
-/* Shared card styles for general cards and Pokémon cards */
-.card,
-.pokemon-card {
-  background: var(--background-light);
-  border: 2px solid #e0e0e0;
+.filters input,
+.filters select {
+  padding: 0.6em 1em;
+  border: 2px solid var(--secondary-color);
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  min-width: 200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition:
-    transform 0.3s,
+    border-color 0.3s,
     box-shadow 0.3s;
 }
 
-/* Type-specific border colors */
-.border-normal {
-  border-color: #9e9e9e;
-}
-.border-fire {
-  border-color: #f44336;
-}
-.border-water {
-  border-color: #2196f3;
-}
-.border-electric {
-  border-color: #ffeb3b;
-}
-.border-grass {
-  border-color: #4caf50;
-}
-.border-ice {
-  border-color: #00bcd4;
-}
-.border-fighting {
-  border-color: #e57373;
-}
-.border-poison {
-  border-color: #9c27b0;
-}
-.border-ground {
-  border-color: #a1887f;
-}
-.border-flying {
-  border-color: #90caf9;
-}
-.border-psychic {
-  border-color: #ba68c8;
-}
-.border-bug {
-  border-color: #8bc34a;
-}
-.border-rock {
-  border-color: #795548;
-}
-.border-ghost {
-  border-color: #616161;
-}
-.border-dragon {
-  border-color: #673ab7;
-}
-.border-dark {
-  border-color: #212121;
-}
-.border-steel {
-  border-color: #b0bec5;
-}
-.border-fairy {
-  border-color: #f48fb1;
-}
-
-/* Pokémon image style with hover effect */
-.pokemon-image {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s;
-}
-
-.pokemon-image:hover {
-  transform: scale(1.1) rotate(5deg);
-}
-
-/* Layout for Pokémon cards: flexbox for horizontal alignment */
-.pokemon-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 100px;
-}
-
-.pokemon-card h3 {
-  margin-right: 20px;
-}
-
-.pokemon-type {
-  margin-left: 20px;
-  text-align: center;
-}
-
-/* Responsive layout: stack vertically on small screens */
-@media (max-width: 767px) {
-  .pokemon-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .pokemon-image {
-    margin-bottom: 10px;
-  }
-
-  .pokemon-card h3,
-  .pokemon-type {
-    margin: 5px 0;
-  }
-}
-
-/* Responsive layout for tablets (optional) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .pokemon-card {
-    padding: 15px;
-  }
-
-  .pokemon-card h3 {
-    font-size: 1.2em;
-  }
-
-  .pokemon-type {
-    font-size: 1em;
-  }
-}
-
-/* Search input styling */
-.searchPokemon {
-  border: 2px solid var(--primary-color);
-  border-radius: 6px;
-  padding: 0.5em;
-  width: 60%;
-  font-size: 1em;
-  margin-bottom: 20px;
-}
-
-.searchPokemon:focus {
+.filters input:focus,
+.filters select:focus {
   outline: none;
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 5px var(--secondary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 6px var(--primary-color);
 }
 
-/* Pagination button styling */
+input,
+select {
+  padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  min-width: 200px;
+}
+
+.pokemon-card {
+  background: var(--card-light);
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  text-align: left;
+}
+
+.pokemon-card p {
+  font-size: 1em;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+.page-info {
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+.border-event {
+  border-color: #3b82f6;
+  background-color: #e0f0ff;
+}
+.border-raid {
+  border-color: #f44336;
+  background-color: #ffe0e0;
+}
+.border-update {
+  border-color: #4caf50;
+  background-color: #e0ffe0;
+}
+.border-announcement {
+  border-color: #ff9800;
+  background-color: #fff5e0;
+}
+
 .pagination-container {
   display: flex;
   justify-content: center;
@@ -362,6 +241,17 @@ function capitalize(str) {
     background 0.3s,
     transform 0.2s;
 }
+.pagination:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pagination:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
 
 .pagination:hover:not(:disabled) {
   background-color: var(--primary-color);
@@ -375,7 +265,40 @@ function capitalize(str) {
   cursor: not-allowed;
 }
 
-.page-info {
+@media (max-width: 480px) {
+  .pokemon-card {
+    flex-direction: column;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (hover: hover) {
+  .pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.reset-button {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.6em 1em;
+  border: 2px solid #ccc;
+  border-radius: 8px;
   font-size: 1em;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+}
+
+.reset-button:hover {
+  background-color: #ccc;
+  transform: scale(1.05);
 }
 </style>

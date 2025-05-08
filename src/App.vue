@@ -21,18 +21,4 @@
   </div>
 </template>
 
-<style scoped>
-/* nav {
-  padding: 1em;
-}
-nav a {
-  margin: 0 0.5em;
-  text-decoration: none;
-  color: #42b983;
-}
-nav a.router-link-exact-active {
-  font-weight: bold;
-} */
-</style>
-
-<!-- 7b5e2c4017154db19bf82d3581f02303 -->
+<style scoped></style>
