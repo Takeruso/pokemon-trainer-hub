@@ -192,76 +192,6 @@ function capitalize(str) {
   margin: 0 auto;
 }
 
-/* Shared card styles for general cards and Pokémon cards */
-.card,
-.pokemon-card {
-  background: var(--background-light);
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-}
-
-/* Type-specific border colors */
-.border-normal {
-  border-color: #9e9e9e;
-}
-.border-fire {
-  border-color: #f44336;
-}
-.border-water {
-  border-color: #2196f3;
-}
-.border-electric {
-  border-color: #ffeb3b;
-}
-.border-grass {
-  border-color: #4caf50;
-}
-.border-ice {
-  border-color: #00bcd4;
-}
-.border-fighting {
-  border-color: #e57373;
-}
-.border-poison {
-  border-color: #9c27b0;
-}
-.border-ground {
-  border-color: #a1887f;
-}
-.border-flying {
-  border-color: #90caf9;
-}
-.border-psychic {
-  border-color: #ba68c8;
-}
-.border-bug {
-  border-color: #8bc34a;
-}
-.border-rock {
-  border-color: #795548;
-}
-.border-ghost {
-  border-color: #616161;
-}
-.border-dragon {
-  border-color: #673ab7;
-}
-.border-dark {
-  border-color: #212121;
-}
-.border-steel {
-  border-color: #b0bec5;
-}
-.border-fairy {
-  border-color: #f48fb1;
-}
-
 /* Pokémon image style with hover effect */
 .pokemon-image {
   width: 100px;
@@ -323,22 +253,6 @@ function capitalize(str) {
   .pokemon-type {
     font-size: 1em;
   }
-}
-
-/* Search input styling */
-.searchPokemon {
-  border: 2px solid var(--primary-color);
-  border-radius: 6px;
-  padding: 0.5em;
-  width: 60%;
-  font-size: 1em;
-  margin-bottom: 20px;
-}
-
-.searchPokemon:focus {
-  outline: none;
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 5px var(--secondary-color);
 }
 
 /* Pagination button styling */

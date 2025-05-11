@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3">
+  <div class="pokemon-card mb-3">
     <div class="card-body">
       <div class="d-flex justify-content-between">
         <h5 class="card-title">{{ pokemon.name }}</h5>
