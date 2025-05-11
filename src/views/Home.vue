@@ -28,16 +28,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import LoginModal from '../components/LoginModal.vue';
 import { RouterLink } from 'vue-router';
 
-// import SignupModal from '@/components/SignupModal.vue';
-// import { useAuth } from '@/composables/useAuth';
-// const { login, register, logout, isLoggdeIn, currentUser } = useAuth();
-
-// const { isLoggedIn } = useAuth();
 const showLogin = ref(false);
-// const showSignup = ref(false);
 </script>
 
 <style scoped>

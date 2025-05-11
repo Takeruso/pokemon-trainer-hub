@@ -243,3 +243,16 @@ img {
     background-color: var(--secondary-color);
   }
 } */
+
+.form-input {
+  padding: 0.6em;
+  border: 2px solid #1e3a8a;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px #3b82f6;
+}

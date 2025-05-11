@@ -1,29 +1,34 @@
+// useDB.js
 import { openDB } from 'idb';
 
-const dbPromise = openDB('my-database', 2, {
+const DB_NAME = 'pokemon-database';
+const STORE_NAME = 'pokemons';
+const VERSION = 1;
+
+const dbPromise = openDB(DB_NAME, VERSION, {
   upgrade(db) {
-    if (!db.objectStoreNames.contains('items')) {
-      db.createObjectStore('items', { keyPath: 'id', autoIncrement: true });
+    if (!db.objectStoreNames.contains(STORE_NAME)) {
+      db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
     }
   },
 });
 
-export async function addItem(item) {
-  const db = await dbPromise;
-  await db.add('items', item);
-}
-
 export async function getAllItems() {
   const db = await dbPromise;
-  return await db.getAll('items');
+  return await db.getAll(STORE_NAME);
+}
+
+export async function addItem(item) {
+  const db = await dbPromise;
+  return await db.add(STORE_NAME, item);
+}
+
+export async function updateItem(item) {
+  const db = await dbPromise;
+  return await db.put(STORE_NAME, item);
 }
 
 export async function deleteItem(id) {
   const db = await dbPromise;
-  await db.delete('items', id);
-}
-
-export async function clearAllItems() {
-  const db = await dbPromise;
-  await db.clear('items');
+  return await db.delete(STORE_NAME, id);
 }

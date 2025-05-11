@@ -1,10 +1,27 @@
 <template>
-  <div>
-    <h2>Sign Up</h2>
-    <input v-model="username" placeholder="Username" />
-    <input type="password" v-model="password" placeholder="Password" />
-    <div v-if="error" class="error">{{ error }}</div>
-    <button @click="handleSignup">Submit</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <h2>Sign Up</h2>
+      </div>
+      <div class="col12 mb-3">
+        <input class="form-input" v-model="username" placeholder="Username" />
+      </div>
+      <div class="col12 mb-3">
+        <input
+          class="form-input"
+          type="password"
+          v-model="password"
+          placeholder="Password"
+        />
+      </div>
+      <div class="col12 mb-3">
+        <div v-if="error" class="error">{{ error }}</div>
+      </div>
+      <div class="col12">
+        <button @click="handleSignup">Submit</button>
+      </div>
+    </div>
   </div>
 </template>
 

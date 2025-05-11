@@ -5,6 +5,7 @@ import About from '../views/About.vue';
 import News from '../views/News.vue';
 import Signup from '../views/Signup.vue';
 import Login from '../views/Login.vue';
+import Pokemon from '../views/Pokemon.vue';
 import { useAuth } from '../composables/useAuth';
 
 const routes = [
@@ -17,6 +18,12 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/pokemon',
+    name: 'Pokemon',
+    component: Pokemon,
     meta: { requiresAuth: true },
   },
 ];

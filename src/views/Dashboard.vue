@@ -1,39 +1,59 @@
 <template>
-  <div>
+  <div class="container mt-4">
     <p>Welcome, {{ currentUser }}! This page is only for logged-in users.</p>
-    <LinkForm :initial-data="newLink" @save="addLink" />
+
+    <!-- ポケモン追加フォーム -->
+    <PokemonForm :initial-data="newPokemon" @save="addPokemon" />
+
+    <!-- 検索バー -->
     <SearchBar v-model="searchQuery" />
 
-    <div v-for="link in filteredLinks" :key="link.id">
-      <LinkCard :link="link" @edit="editLink" @delete="deleteLink" />
+    <!-- ポケモン表示カード一覧 -->
+    <div v-for="pokemon in filteredPokemons" :key="pokemon.id">
+      <PokemonCard
+        :pokemon="pokemon"
+        @like="likePokemon"
+        @delete="deletePokemon"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { useAuth } from '@/composables/useAuth';
-
-const { currentUser } = useAuth();
 import { ref, computed } from 'vue';
-import { useLinks } from '../composables/useLinks';
-import LinkForm from '../components/LinkForm.vue';
-import LinkCard from '../components/LinkCard.vue';
+import { useAuth } from '@/composables/useAuth';
+import { usePokemons } from '@/composables/usePokemons'; // ← useLinks → usePokemons に修正
+
+import PokemonForm from '../components/PokemonForm.vue';
+import PokemonCard from '../components/PokemonCard.vue';
 import SearchBar from '../components/SearchBar.vue';
 
-const userId = 'takeru';
-// add updateLink later
-const { links, addLink, deleteLink } = useLinks(userId);
+const { currentUser } = useAuth();
 
+// ← 必要ならログインユーザーIDを取得して使う
+const userId = 'takeru'; // または currentUser.id
+const {
+  pokemons,
+  addPokemon,
+  deletePokemon,
+  likePokemon, // ← これも解体しておく！
+} = usePokemons();
+
+// 検索バーの文字列
 const searchQuery = ref('');
-const filteredLinks = computed(() =>
-  links.value.filter((link) =>
-    link.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+
+// ポケモンを検索してフィルタ
+const filteredPokemons = computed(() =>
+  pokemons.value.filter((p) =>
+    p.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 );
 
-const newLink = ref({ name: '', url: '', important: false });
+// フォーム用の新規ポケモンデータ
+const newPokemon = ref({ name: '', type: '', isFavorite: false });
 
-const editLink = (link) => {
-  newLink.value = { ...link };
+// 編集機能を使いたいときに使う
+const editPokemon = (pokemon) => {
+  newPokemon.value = { ...pokemon };
 };
 </script>
