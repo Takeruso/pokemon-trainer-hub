@@ -10,11 +10,18 @@ export function usePokemons() {
 
   const addPokemon = async (pokemon) => {
     const newPokemon = {
-      ...pokemon,
+      name: pokemon.name,
+      comment: pokemon.comment,
       likes: 0,
     };
 
     const id = await addItem(newPokemon);
+    pokemons.value = await getAllItems();
+  };
+
+  const editPokemon = async (pokemon) => {
+    const plain = JSON.parse(JSON.stringify(pokemon));
+    await updateItem(plain);
     pokemons.value = await getAllItems();
   };
 
@@ -35,6 +42,7 @@ export function usePokemons() {
   return {
     pokemons,
     addPokemon,
+    editPokemon,
     deletePokemon,
     likePokemon,
   };

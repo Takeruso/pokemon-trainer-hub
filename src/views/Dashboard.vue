@@ -14,6 +14,7 @@
         :pokemon="pokemon"
         @like="likePokemon"
         @delete="deletePokemon"
+        @edit="editPokemon"
       />
     </div>
   </div>
@@ -22,7 +23,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useAuth } from '@/composables/useAuth';
-import { usePokemons } from '@/composables/usePokemons'; // ← useLinks → usePokemons に修正
+import { usePokemons } from '@/composables/usePokemons';
 
 import PokemonForm from '../components/PokemonForm.vue';
 import PokemonCard from '../components/PokemonCard.vue';
@@ -31,11 +32,12 @@ import SearchBar from '../components/SearchBar.vue';
 const { currentUser } = useAuth();
 
 // ← 必要ならログインユーザーIDを取得して使う
-const userId = 'takeru'; // または currentUser.id
+const userId = currentUser.id; // または currentUser.id
 const {
   pokemons,
   addPokemon,
   deletePokemon,
+  editPokemon,
   likePokemon, // ← これも解体しておく！
 } = usePokemons();
 
@@ -50,10 +52,11 @@ const filteredPokemons = computed(() =>
 );
 
 // フォーム用の新規ポケモンデータ
-const newPokemon = ref({ name: '', type: '', isFavorite: false });
+const newPokemon = ref({ name: '', comment: '', isFavorite: false });
 
 // 編集機能を使いたいときに使う
-const editPokemon = (pokemon) => {
+const startEdit = (pokemon) => {
   newPokemon.value = { ...pokemon };
+  isEditing.value = true;
 };
 </script>

@@ -2,29 +2,66 @@
   <div class="pokemon-card mb-3">
     <div class="card-body">
       <div class="d-flex justify-content-between">
-        <h5 class="card-title">{{ pokemon.name }}</h5>
-        <span class="badge bg-secondary">{{ pokemon.type }}</span>
+        <h5 v-if="!editing" class="card-title">{{ local.name }}</h5>
+        <input v-else v-model="local.name" class="form-control" />
       </div>
 
-      <p class="card-text">❤️ {{ pokemon.likes }} Likes</p>
+      <p v-if="!editing" class="card-text">{{ local.comment }}</p>
+      <textarea v-else v-model="local.comment" class="form-control"></textarea>
 
-      <button
-        class="btn btn-outline-primary me-2"
-        @click="$emit('like', pokemon.id)"
-      >
-        👍 Like
-      </button>
-      <button
-        class="btn btn-outline-danger"
-        @click="$emit('delete', pokemon.id)"
-      >
-        🗑 Delete
-      </button>
+      <p class="card-text">❤️ {{ local.likes }} Likes</p>
+
+      <div v-if="!editing">
+        <button @click="handleLike" class="btn btn-outline-primary me-2">
+          👍 Like
+        </button>
+        <button @click="startEdit" class="btn btn-outline-warning me-2">
+          ✏️ Edit
+        </button>
+        <button
+          @click="$emit('delete', local.id)"
+          class="btn btn-outline-danger"
+        >
+          🗑 Delete
+        </button>
+      </div>
+
+      <div v-else>
+        <button @click="saveEdit" class="btn btn-outline-success me-2">
+          💾 Save
+        </button>
+        <button @click="cancelEdit" class="btn btn-outline-secondary">
+          ❌ Cancel
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps(['pokemon']);
-defineEmits(['like', 'delete']);
+import { ref } from 'vue';
+const props = defineProps(['pokemon']);
+const emit = defineEmits(['like', 'delete', 'edit']);
+
+const editing = ref(false);
+const local = ref({ ...props.pokemon });
+
+const handleLike = () => {
+  emit('like', local.value.id);
+  local.value.likes++;
+};
+
+const startEdit = () => {
+  editing.value = true;
+};
+
+const saveEdit = () => {
+  emit('edit', local.value);
+  editing.value = false;
+};
+
+const cancelEdit = () => {
+  local.value = { ...props.pokemon };
+  editing.value = false;
+};
 </script>

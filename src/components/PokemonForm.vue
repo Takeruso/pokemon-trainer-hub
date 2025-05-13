@@ -12,18 +12,13 @@
             />
           </div>
           <div class="col-12">
-            <select v-model="form.type" class="form-input mb-2" required>
-              <option disabled value="">Select Type</option>
-              <option>Fire</option>
-              <option>Water</option>
-              <option>Grass</option>
-              <option>Electric</option>
-              <option>Normal</option>
-              <option>Psychic</option>
-              <option>Ghost</option>
-              <option>Dark</option>
-              <option>Dragon</option>
-            </select>
+            <textarea
+              v-model="form.comment"
+              placeholder="Enter your comments"
+              class="form-input mb-2"
+              rows="3"
+              required
+            ></textarea>
           </div>
 
           <button type="submit" class="handleLogin">Save</button>
