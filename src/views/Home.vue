@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <h1>Pokémon Trainer Hub</h1>
+  <div class="container">
+    <h1 class="col-12 mt-3">Pokémon Trainer Hub</h1>
     <p>
       Welcome, Trainer! Here you can explore your favorite Pokémon, check their
       stats, and prepare for your next big battle.
     </p>
-    <div class="image-container">
+    <div class="image-container col-12">
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
         alt="Pikachu"
@@ -17,7 +17,7 @@
         width="200"
       />
     </div>
-    <div style="margin-top: 20px">
+    <div class="col-12" style="margin-top: 20px">
       <RouterLink to="/Login"> <button>🔑 Log In</button></RouterLink>
       <RouterLink to="/Signup" style="margin-left: 10px">
         <button>📝 Sign Up</button>

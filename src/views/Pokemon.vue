@@ -1,11 +1,11 @@
 <template>
-  <div class="main-content--pokemon">
-    <h1>Pokémon Spotlight</h1>
+  <div class="container">
+    <h1 class="col-12 mt-3">Pokémon Spotlight</h1>
 
     <!-- Search input -->
     <input
       v-model="searchQuery"
-      class="searchPokemon"
+      class="searchPokemon col-12"
       placeholder="Search Pokémon..."
     />
     <button v-if="searchQuery" @click="clearSearch">Clear Search</button>

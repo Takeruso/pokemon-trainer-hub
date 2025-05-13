@@ -1,17 +1,28 @@
 <template>
-  <div class="about-content">
-    <h1>About This App</h1>
-    <p>
+  <!-- <div class="about-content"> -->
+  <div class="container">
+    <h1 class="col-12 mt-3">About This App</h1>
+    <p class="col-12">
       Welcome to the Hoenn Pokémon Selector! Enter your name and pick your side:
       Mountain or Ocean. We’ll show you which legendary Pokémon matches you!
     </p>
 
-    <div class="form-group names">
-      <input v-model="firstName" placeholder="First Name" class="form-input" />
-      <input v-model="lastName" placeholder="Last Name" class="form-input" />
+    <div class="d-flex justify-content-center gap-3 flex-wrap text-center">
+      <input
+        v-model="firstName"
+        placeholder="First Name"
+        class="form-input w-auto"
+        style="min-width: 200px"
+      />
+      <input
+        v-model="lastName"
+        placeholder="Last Name"
+        class="form-input w-auto"
+        style="min-width: 200px"
+      />
     </div>
 
-    <div class="form-group">
+    <div class="form-group d-flex justify-content-center gap-3 flex-wrap">
       <label>Select your favorite type:</label>
       <div class="radio-group">
         <label

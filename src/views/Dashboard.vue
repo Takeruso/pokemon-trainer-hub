@@ -1,6 +1,7 @@
 <template>
   <div class="container mt-4">
-    <p>Welcome, {{ currentUser }}! This page is only for logged-in users.</p>
+    <h1>Dashboard Hub</h1>
+    <p>Hello {{ currentUser }}! Post your message below 👇</p>
 
     <!-- ポケモン追加フォーム -->
     <PokemonForm :initial-data="newPokemon" @save="addPokemon" />

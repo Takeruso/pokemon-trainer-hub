@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h1>Pokémon News</h1>
+  <div class="container">
+    <h1 class="col-12 mt-3">Pokémon News</h1>
 
     <!-- Filters -->
-    <div class="filters">
+    <div class="filters col-12">
       <input v-model="searchTitle" placeholder="Search by title..." />
       <input v-model="searchContent" placeholder="Search by content..." />
       <input type="date" v-model="searchDate" placeholder="Date" />
@@ -19,7 +19,7 @@
       </select>
       <button
         v-if="searchTitle || searchContent || searchDate || selectedCategory"
-        class="reset-button"
+        class="reset-button col-12"
         @click="resetFilters"
       >
         Clear Search
@@ -32,7 +32,7 @@
       :key="news.title"
       :class="['pokemon-card', 'border-' + news.category.toLowerCase()]"
     >
-      <div class="card-header">
+      <div class="card-header col-12">
         <h3>{{ news.title }}</h3>
         <span class="date">{{ news.date }}</span>
       </div>
@@ -41,7 +41,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="pagination-container">
+    <div class="pagination-container col-12">
       <button
         class="pagination"
         @click="prevPage"
