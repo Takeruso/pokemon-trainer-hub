@@ -1,38 +1,48 @@
 <template>
   <div class="pokemon-card mb-3">
     <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <h5 v-if="!editing" class="card-title">{{ local.name }}</h5>
-        <input v-else v-model="local.name" class="form-control" />
-      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+          <h5 v-if="!editing" class="card-title">{{ local.name }}</h5>
+          <input v-else v-model="local.name" class="form-control" />
+        </div>
 
-      <p v-if="!editing" class="card-text">{{ local.comment }}</p>
-      <textarea v-else v-model="local.comment" class="form-control"></textarea>
+        <div class="col-12">
+          <p v-if="!editing" class="card-text">{{ local.comment }}</p>
+          <textarea
+            v-else
+            v-model="local.comment"
+            class="form-control"
+          ></textarea>
+        </div>
 
-      <p class="card-text">❤️ {{ local.likes }} Likes</p>
+        <div class="col-12">
+          <p class="card-text">❤️ {{ local.likes }} Likes</p>
+        </div>
 
-      <div v-if="!editing">
-        <button @click="handleLike" class="btn btn-outline-primary me-2">
-          👍 Like
-        </button>
-        <button @click="startEdit" class="btn btn-outline-warning me-2">
-          ✏️ Edit
-        </button>
-        <button
-          @click="$emit('delete', local.id)"
-          class="btn btn-outline-danger"
-        >
-          🗑 Delete
-        </button>
-      </div>
+        <div class="col-12" v-if="!editing">
+          <button @click="handleLike" class="btn btn-outline-primary me-2">
+            👍 Like
+          </button>
+          <button @click="startEdit" class="btn btn-outline-warning me-2">
+            ✏️ Edit
+          </button>
+          <button
+            @click="$emit('delete', local.id)"
+            class="btn btn-outline-danger"
+          >
+            🗑 Delete
+          </button>
+        </div>
 
-      <div v-else>
-        <button @click="saveEdit" class="btn btn-outline-success me-2">
-          💾 Save
-        </button>
-        <button @click="cancelEdit" class="btn btn-outline-secondary">
-          ❌ Cancel
-        </button>
+        <div class="col-12" v-else>
+          <button @click="saveEdit" class="btn btn-outline-success me-2">
+            💾 Save
+          </button>
+          <button @click="cancelEdit" class="btn btn-outline-secondary">
+            ❌ Cancel
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,61 +1,84 @@
 <template>
   <!-- <div class="about-content"> -->
   <div class="container">
-    <h1 class="col-12 mt-3">About This App</h1>
-    <p class="col-12">
-      Welcome to the Hoenn Pokémon Selector! Enter your name and pick your side:
-      Mountain or Ocean. We’ll show you which legendary Pokémon matches you!
-    </p>
-
-    <div class="d-flex justify-content-center gap-3 flex-wrap text-center">
-      <input
-        v-model="firstName"
-        placeholder="First Name"
-        class="form-input w-auto"
-        style="min-width: 200px"
-      />
-      <input
-        v-model="lastName"
-        placeholder="Last Name"
-        class="form-input w-auto"
-        style="min-width: 200px"
-      />
-    </div>
-
-    <div class="form-group d-flex justify-content-center gap-3 flex-wrap">
-      <label>Select your favorite type:</label>
-      <div class="radio-group">
-        <label
-          v-for="type in types"
-          :key="type"
-          :class="[
-            'radio-option',
-            { selected: selectedType === type },
-            type.toLowerCase(),
-          ]"
-        >
-          <input type="radio" :value="type" v-model="selectedType" />
-          <span>{{ typeEmojis[type] }} {{ type }}</span>
-        </label>
+    <div class="row">
+      <div class="col-12 mt-3">
+        <h1>About This App</h1>
       </div>
     </div>
 
-    <div v-if="selectedType" class="result">
-      <h3>
-        Welcome, {{ displayName }}! You chose <strong>{{ selectedType }}</strong
-        >.
-      </h3>
-      <p>
-        You might like: <strong>{{ recommendedPokemon }}</strong>
-      </p>
-      <transition name="fade">
-        <img
-          v-if="typeImage"
-          :src="typeImage"
-          :alt="`${selectedType} Pokémon`"
-          class="type-image"
-        />
-      </transition>
+    <div class="row">
+      <div class="col-12">
+        <p>
+          Welcome to the Hoenn Pokémon Selector! Enter your name and pick your
+          side: Mountain or Ocean. We’ll show you which legendary Pokémon
+          matches you!
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-center gap-3 flex-wrap text-center">
+          <input
+            v-model="firstName"
+            placeholder="First Name"
+            class="form-input w-auto"
+            style="min-width: 200px"
+          />
+          <input
+            v-model="lastName"
+            placeholder="Last Name"
+            class="form-input w-auto"
+            style="min-width: 200px"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group d-flex justify-content-center gap-3 flex-wrap">
+          <label>Select your favorite type:</label>
+          <div class="radio-group">
+            <label
+              v-for="type in types"
+              :key="type"
+              :class="[
+                'radio-option',
+                { selected: selectedType === type },
+                type.toLowerCase(),
+              ]"
+            >
+              <input type="radio" :value="type" v-model="selectedType" />
+              <span>{{ typeEmojis[type] }} {{ type }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div v-if="selectedType" class="result">
+          <h3>
+            Welcome, {{ displayName }}! You chose
+            <strong>{{ selectedType }}</strong
+            >.
+          </h3>
+          <p>
+            You might like: <strong>{{ recommendedPokemon }}</strong>
+          </p>
+          <transition name="fade">
+            <img
+              v-if="typeImage"
+              :src="typeImage"
+              :alt="`${selectedType} Pokémon`"
+              class="type-image"
+            />
+          </transition>
+        </div>
+      </div>
     </div>
   </div>
 </template>

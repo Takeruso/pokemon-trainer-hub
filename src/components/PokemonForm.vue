@@ -3,25 +3,28 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <form @submit.prevent="onSubmit">
-          <div class="col-12">
-            <input
-              v-model="form.name"
-              placeholder="Pokémon Name"
-              class="form-input mb-2"
-              required
-            />
+          <div class="row">
+            <div class="col-12">
+              <input
+                v-model="form.name"
+                placeholder="Pokémon Name"
+                class="form-input mb-2"
+                required
+              />
+            </div>
+            <div class="col-12">
+              <textarea
+                v-model="form.comment"
+                placeholder="Enter your comments"
+                class="form-input mb-2"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="handleLogin">Save</button>
+            </div>
           </div>
-          <div class="col-12">
-            <textarea
-              v-model="form.comment"
-              placeholder="Enter your comments"
-              class="form-input mb-2"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-
-          <button type="submit" class="handleLogin">Save</button>
         </form>
       </div>
     </div>

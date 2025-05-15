@@ -1,22 +1,32 @@
 <template>
   <div class="container mt-4">
-    <h1>Dashboard Hub</h1>
-    <p>Hello {{ currentUser }}! Post your message below 👇</p>
+    <div class="row">
+      <div class="col-12">
+        <h1>Dashboard Hub</h1>
+      </div>
+    </div>
 
-    <!-- ポケモン追加フォーム -->
-    <PokemonForm :initial-data="newPokemon" @save="addPokemon" />
+    <div class="row mb-3">
+      <div class="col-12">
+        <PokemonForm :initial-data="newPokemon" @save="addPokemon" />
+      </div>
+    </div>
 
-    <!-- 検索バー -->
-    <SearchBar v-model="searchQuery" />
+    <div class="row mb-3">
+      <div class="col-12">
+        <SearchBar v-model="searchQuery" />
+      </div>
+    </div>
 
-    <!-- ポケモン表示カード一覧 -->
-    <div v-for="pokemon in filteredPokemons" :key="pokemon.id">
-      <PokemonCard
-        :pokemon="pokemon"
-        @like="likePokemon"
-        @delete="deletePokemon"
-        @edit="editPokemon"
-      />
+    <div class="row">
+      <div class="col-12" v-for="pokemon in filteredPokemons" :key="pokemon.id">
+        <PokemonCard
+          :pokemon="pokemon"
+          @like="likePokemon"
+          @delete="deletePokemon"
+          @edit="editPokemon"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -32,30 +42,20 @@ import SearchBar from '../components/SearchBar.vue';
 
 const { currentUser } = useAuth();
 
-// ← 必要ならログインユーザーIDを取得して使う
-const userId = currentUser.id; // または currentUser.id
-const {
-  pokemons,
-  addPokemon,
-  deletePokemon,
-  editPokemon,
-  likePokemon, // ← これも解体しておく！
-} = usePokemons();
+const userId = currentUser.id;
+const { pokemons, addPokemon, deletePokemon, editPokemon, likePokemon } =
+  usePokemons();
 
-// 検索バーの文字列
 const searchQuery = ref('');
 
-// ポケモンを検索してフィルタ
 const filteredPokemons = computed(() =>
   pokemons.value.filter((p) =>
     p.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 );
 
-// フォーム用の新規ポケモンデータ
 const newPokemon = ref({ name: '', comment: '', isFavorite: false });
 
-// 編集機能を使いたいときに使う
 const startEdit = (pokemon) => {
   newPokemon.value = { ...pokemon };
   isEditing.value = true;

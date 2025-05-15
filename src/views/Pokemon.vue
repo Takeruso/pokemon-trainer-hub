@@ -1,58 +1,69 @@
 <template>
   <div class="container">
-    <h1 class="col-12 mt-3">Pokémon Spotlight</h1>
+    <div class="row">
+      <h1 class="col-12 mt-3">Pokémon Spotlight</h1>
+    </div>
 
-    <!-- Search input -->
-    <input
-      v-model="searchQuery"
-      class="searchPokemon col-12"
-      placeholder="Search Pokémon..."
-    />
-    <button v-if="searchQuery" @click="clearSearch">Clear Search</button>
-
-    <!-- Loading / error handling -->
-    <div v-if="loading">Loading Pokémon...</div>
-    <div v-else-if="error">{{ error }}</div>
-
-    <!-- Pokémon list -->
-    <div v-else>
-      <div
-        v-for="pokemon in paginatedPokemons"
-        :key="pokemon.name"
-        :class="['pokemon-card', 'border-' + getPrimaryType(pokemon.type)]"
-      >
-        <h3>{{ capitalize(pokemon.name) }}</h3>
-        <img
-          :src="pokemon.image"
-          :alt="`${pokemon.name} image`"
-          class="pokemon-image"
+    <div class="row">
+      <div class="col-12">
+        <input
+          v-model="searchQuery"
+          class="searchPokemon col-12"
+          placeholder="Search Pokémon..."
         />
-        <p class="pokemon-type">Type: {{ pokemon.type }}</p>
+        <button v-if="searchQuery" @click="clearSearch">Clear Search</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div v-if="loading">Loading Pokémon...</div>
+        <div v-else-if="error">{{ error }}</div>
+
+        <div v-else>
+          <div
+            v-for="pokemon in paginatedPokemons"
+            :key="pokemon.name"
+            :class="['pokemon-card', 'border-' + getPrimaryType(pokemon.type)]"
+          >
+            <h3>{{ capitalize(pokemon.name) }}</h3>
+            <img
+              :src="pokemon.image"
+              :alt="`${pokemon.name} image`"
+              class="pokemon-image"
+            />
+            <p class="pokemon-type">Type: {{ pokemon.type }}</p>
+          </div>
+        </div>
       </div>
 
       <!-- Pagination controls -->
-      <div class="pagination-container">
-        <button
-          class="pagination"
-          @click="prevPage"
-          :disabled="currentPage === 1 || loading"
-          aria-label="Previous page"
-        >
-          Prev
-        </button>
+      <div class="row">
+        <div class="col-12">
+          <div class="pagination-container">
+            <button
+              class="pagination"
+              @click="prevPage"
+              :disabled="currentPage === 1 || loading"
+              aria-label="Previous page"
+            >
+              Prev
+            </button>
 
-        <span class="page-info"
-          >Page {{ currentPage }} of {{ totalPages }}</span
-        >
+            <span class="page-info"
+              >Page {{ currentPage }} of {{ totalPages }}</span
+            >
 
-        <button
-          class="pagination"
-          @click="nextPage"
-          :disabled="currentPage === totalPages || loading"
-          aria-label="Next page"
-        >
-          Next
-        </button>
+            <button
+              class="pagination"
+              @click="nextPage"
+              :disabled="currentPage === totalPages || loading"
+              aria-label="Next page"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

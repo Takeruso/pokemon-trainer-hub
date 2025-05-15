@@ -1,66 +1,86 @@
 <template>
   <div class="container">
-    <h1 class="col-12 mt-3">Pokémon News</h1>
+    <div class="row">
+      <div class="col-12 mt-3">
+        <h1>Pokémon News</h1>
+      </div>
+    </div>
 
     <!-- Filters -->
-    <div class="filters col-12">
-      <input v-model="searchTitle" placeholder="Search by title..." />
-      <input v-model="searchContent" placeholder="Search by content..." />
-      <input type="date" v-model="searchDate" placeholder="Date" />
-      <select v-model="selectedCategory">
-        <option value="">All Categories</option>
-        <option
-          v-for="category in uniqueCategories"
-          :key="category"
-          :value="category"
-        >
-          {{ category }}
-        </option>
-      </select>
-      <button
-        v-if="searchTitle || searchContent || searchDate || selectedCategory"
-        class="reset-button col-12"
-        @click="resetFilters"
-      >
-        Clear Search
-      </button>
+    <div class="row">
+      <div class="col-12">
+        <div class="filters">
+          <input v-model="searchTitle" placeholder="Search by title..." />
+          <input v-model="searchContent" placeholder="Search by content..." />
+          <input type="date" v-model="searchDate" placeholder="Date" />
+          <select v-model="selectedCategory">
+            <option value="">All Categories</option>
+            <option
+              v-for="category in uniqueCategories"
+              :key="category"
+              :value="category"
+            >
+              {{ category }}
+            </option>
+          </select>
+          <button
+            v-if="
+              searchTitle || searchContent || searchDate || selectedCategory
+            "
+            class="reset-button"
+            @click="resetFilters"
+          >
+            Clear Search
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- News Cards -->
-    <div
-      v-for="news in paginatedNews"
-      :key="news.title"
-      :class="['pokemon-card', 'border-' + news.category.toLowerCase()]"
-    >
-      <div class="card-header col-12">
-        <h3>{{ news.title }}</h3>
-        <span class="date">{{ news.date }}</span>
+    <div class="row">
+      <div class="col-12">
+        <div
+          v-for="news in paginatedNews"
+          :key="news.title"
+          :class="['pokemon-card', 'border-' + news.category.toLowerCase()]"
+        >
+          <div class="card-header">
+            <h3>{{ news.title }}</h3>
+            <span class="date">{{ news.date }}</span>
+          </div>
+          <p><strong>Category:</strong> {{ news.category }}</p>
+          <p>{{ news.content }}</p>
+        </div>
       </div>
-      <p><strong>Category:</strong> {{ news.category }}</p>
-      <p>{{ news.content }}</p>
     </div>
 
     <!-- Pagination -->
-    <div class="pagination-container col-12">
-      <button
-        class="pagination"
-        @click="prevPage"
-        :disabled="currentPage === 1 || loading"
-        aria-label="Previous page"
-      >
-        Prev
-      </button>
+    <div class="row">
+      <div class="col-12">
+        <div class="pagination-container">
+          <button
+            class="pagination"
+            @click="prevPage"
+            :disabled="currentPage === 1 || loading"
+            aria-label="Previous page"
+          >
+            Prev
+          </button>
 
-      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+          <span class="page-info"
+            >Page {{ currentPage }} of {{ totalPages }}</span
+          >
 
-      <button
-        class="pagination"
-        @click="nextPage"
-        :disabled="currentPage === totalPages || loading"
-        aria-label="Next page"
-      >
-        Next
-      </button>
+          <button
+            class="pagination"
+            @click="nextPage"
+            :disabled="currentPage === totalPages || loading"
+            aria-label="Next page"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -18,10 +18,10 @@
       <div class="col-12">
         <div v-if="error" class="error">{{ error }}</div>
       </div>
-    </div>
 
-    <div class="col-12">
-      <button @click="handleLogin">Submit</button>
+      <div class="col-12">
+        <button @click="handleLogin">Submit</button>
+      </div>
     </div>
   </div>
 </template>
