@@ -50,3 +50,14 @@ export function useAuth() {
     logout,
   };
 }
+
+async function injectDefaultUser() {
+  const db = await dbPromise;
+  const existing = await db.get('users', 'admin');
+  if (!existing) {
+    await db.add('users', { username: 'admin', password: '1234' });
+    console.log('Default user "admin" injected');
+  }
+}
+
+injectDefaultUser();

@@ -5,6 +5,34 @@ export function usePokemons() {
   const pokemons = ref([]);
 
   onMounted(async () => {
+    const allItems = await getAllItems();
+
+    if (allItems.length === 0) {
+      const sampleData = [
+        {
+          name: 'Alice',
+          comment: 'Vue 3 is amazing! Loving the Composition API.',
+          likes: 4,
+        },
+        {
+          name: 'Bob',
+          comment: 'Anyone tried Pinia instead of Vuex?',
+          likes: 2,
+        },
+        {
+          name: 'Charlie',
+          comment: 'What’s your favourite UI framework? Bootstrap? Tailwind?',
+          likes: 1,
+        },
+      ];
+
+      for (const item of sampleData) {
+        await addItem(item);
+      }
+
+      console.log('✅ Sample data injected into IndexedDB.');
+    }
+
     pokemons.value = await getAllItems();
   });
 
