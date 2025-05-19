@@ -15,7 +15,7 @@ const { isLoggedIn, logout } = useAuth();
       <span v-if="isLoggedIn">
         | <router-link to="/dashboard">Dashboard</router-link> |
         <router-link to="/pokemon">Pokemon</router-link>
-        | <a href="#" @click.prevent="logout">Logout</a>
+        | <a href="#" @click="logout">Logout</a>
       </span>
     </nav>
 

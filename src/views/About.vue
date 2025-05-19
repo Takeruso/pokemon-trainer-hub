@@ -69,10 +69,11 @@
           <p>
             You might like: <strong>{{ recommendedPokemon }}</strong>
           </p>
-          <transition name="fade">
+          <transition name="fade" mode="out-in">
             <img
               v-if="typeImage"
               :src="typeImage"
+              :key="selectedType"
               :alt="`${selectedType} Pokémon`"
               class="type-image"
             />
@@ -126,7 +127,6 @@ const recommendedPokemon = computed(() => {
 
 <style scoped>
 .about-content {
-  /* max-width: 700px; */
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -202,6 +202,7 @@ const recommendedPokemon = computed(() => {
   height: auto;
   margin-top: 20px;
   transition: transform 0.3s ease;
+  opacity: 1;
 }
 
 .type-image:hover {
@@ -210,8 +211,9 @@ const recommendedPokemon = computed(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.5s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

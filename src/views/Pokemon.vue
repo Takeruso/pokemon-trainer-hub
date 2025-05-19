@@ -125,7 +125,7 @@ watch(searchQuery, async (newQuery) => {
     fetchPokemonPage(offset, itemsPerPage);
   } else {
     // Load large batch only once for searching
-    if (pokemons.value.length < 1000) {
+    if (pokemons.value.length < 100) {
       loading.value = true;
       try {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
@@ -138,6 +138,9 @@ watch(searchQuery, async (newQuery) => {
               name: item.name,
               image: details.sprites.front_default,
               type: details.types.map((t) => t.type.name).join(', '),
+              // function(t) {
+              //   return t.type.name;
+              // },
             };
           })
         );
