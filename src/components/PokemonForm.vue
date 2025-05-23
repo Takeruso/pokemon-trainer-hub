@@ -7,7 +7,7 @@
             <div class="col-12">
               <input
                 v-model="form.name"
-                placeholder="Pokémon Name"
+                placeholder="Your Name"
                 class="form-input mb-2"
                 required
               />
@@ -35,10 +35,15 @@
 import { reactive } from 'vue';
 const props = defineProps(['initialData']);
 const emit = defineEmits(['save']);
+const initialState = {
+  name: '',
+  comment: ''
+};
 
 const form = reactive({ ...props.initialData });
 
 const onSubmit = () => {
   emit('save', { ...form });
+  Object.assign(form, initialState);
 };
 </script>
