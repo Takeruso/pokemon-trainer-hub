@@ -1,31 +1,28 @@
 import { ref } from 'vue';
-import { openDB } from 'idb';
 
+const API_BASE = '/api';
 const isLoggedIn = ref(localStorage.getItem('isLoggedIn') === 'true');
 const currentUser = ref(localStorage.getItem('currentUser') || '');
 
-const dbPromise = openDB('my-database', 2, {
-  upgrade(db) {
-    if (!db.objectStoreNames.contains('users')) {
-      db.createObjectStore('users', { keyPath: 'username' });
-    }
-  },
-});
-
 export function useAuth() {
   async function register(username, password) {
-    const db = await dbPromise;
-    const existing = await db.get('users', username);
-    if (existing) {
+    const res = await fetch(`${API_BASE}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!res.ok) {
       throw new Error('User already exists');
     }
-    await db.add('users', { username, password });
   }
 
   async function login(username, password) {
-    const db = await dbPromise;
-    const user = await db.get('users', username);
-    if (user && user.password === password) {
+    const res = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (res.ok) {
       isLoggedIn.value = true;
       currentUser.value = username;
       localStorage.setItem('isLoggedIn', 'true');
@@ -50,14 +47,3 @@ export function useAuth() {
     logout,
   };
 }
-
-async function injectDefaultUser() {
-  const db = await dbPromise;
-  const existing = await db.get('users', 'admin');
-  if (!existing) {
-    await db.add('users', { username: 'admin', password: '1234' });
-    console.log('Default user "admin" injected');
-  }
-}
-
-injectDefaultUser();
