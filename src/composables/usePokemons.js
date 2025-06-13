@@ -30,7 +30,7 @@ export function usePokemons() {
         await addItem(item);
       }
 
-      console.log('✅ Sample data injected into IndexedDB.');
+      console.log('✅ Sample data injected into MongoDB.');
     }
 
     pokemons.value = await getAllItems();
@@ -43,7 +43,7 @@ export function usePokemons() {
       likes: 0,
     };
 
-    const id = await addItem(newPokemon);
+    await addItem(newPokemon);
     pokemons.value = await getAllItems();
   };
 
@@ -55,11 +55,11 @@ export function usePokemons() {
 
   const deletePokemon = async (id) => {
     await deleteItem(id);
-    pokemons.value = pokemons.value.filter((p) => p.id !== id);
+    pokemons.value = pokemons.value.filter((p) => p._id !== id);
   };
 
   const likePokemon = async (id) => {
-    const target = pokemons.value.find((p) => p.id === id);
+    const target = pokemons.value.find((p) => p._id === id);
     if (target) {
       target.likes++;
       console.log('🧪 debug: Liked ID =', id);
