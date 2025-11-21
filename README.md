@@ -1,5 +1,103 @@
-# Vue 3 + Vite
+# Pokemon Trainer Hub
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A small full-stack demo application showcasing **authentication**, **comment CRUD**, and **external API integration**.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+---
+
+## 🔧 Tech Stack
+
+**Frontend**
+
+* React + TypeScript
+* Vite
+
+**Backend**
+
+* Node.js + Express
+* Mongoose (MongoDB Atlas)
+
+**External Services**
+
+* PokéAPI (REST)
+* Local JSON-based News feed
+
+---
+
+## ✨ Features
+
+### Authentication
+
+* User signup & login
+* Password hashing via **bcrypt**
+
+### Comments Dashboard
+
+* Create / Edit / Delete / Like comments
+* Stored in MongoDB Atlas
+* Includes live search filtering
+
+### Pokémon Viewer
+
+* Fetches Pokémon details (name, type, image) from PokéAPI
+
+### News Page
+
+* Renders articles from a local JSON feed
+
+---
+
+## 🚀 Getting Started
+
+### 1. Backend Setup
+
+```bash
+cd server
+
+# Create environment file (if not already created)
+cp .env.example .env
+
+# Add your MongoDB connection string
+echo "MONGO_URI=<your MongoDB URI>" >> .env
+
+# Start the server
+node server.js
+```
+
+**API Base URL:**
+`http://localhost:3000`
+
+---
+
+### 2. Frontend Setup
+
+```bash
+npm install
+npm run dev
+```
+
+**Frontend Dev Server:**
+`http://localhost:5173`
+
+---
+
+## 📁 Project Structure
+
+```plaintext
+pokemon-trainer-hub/
+│
+├── server/                 # Express backend
+│   ├── models/
+│   ├── routes/
+│   └── server.js
+│
+├── src/                    # React frontend
+│   ├── components/
+│   ├── pages/
+│   └── App.tsx
+│
+└── package.json
+```
+
+---
+
+Additional sections (API routes, deployment steps, screenshots) can be added as needed.
