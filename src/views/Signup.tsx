@@ -48,6 +48,7 @@ function Signup() {
           <h2>Sign Up</h2>
         </div>
 
+      <div className="col-12 d-flex justify-content-center">
         <FormWrapper onSubmit={handleSignup}>
           <FormInput
             name="username"
@@ -70,6 +71,7 @@ function Signup() {
             <button type="submit">Submit</button>
           </div>
         </FormWrapper>
+        </div>
 
         <div className="col-12">
           <FormAlert

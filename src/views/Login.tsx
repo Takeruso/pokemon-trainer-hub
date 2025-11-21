@@ -83,6 +83,7 @@ function Login() {
           <h2>Login</h2>
         </div>
 
+      <div className="col-12 d-flex justify-content-center">
         <FormWrapper onSubmit={handleLogin}>
           <FormInput
             name="username"
@@ -107,6 +108,7 @@ function Login() {
             </button>
           </div>
         </FormWrapper>
+        </div>
 
         <div className="col-12 mb-3">
           {message && (
