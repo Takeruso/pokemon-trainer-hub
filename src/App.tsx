@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
   NavLink,
-  Navigate,
+  Link,
+  // Navigate,
 } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import Home from './views/Home';
@@ -19,39 +19,35 @@ function App() {
   const { isLoggedIn, logout } = useAuth();
 
   return (
-    <BrowserRouter basename="/cos30043/s102784225/">
-      <div className="main-content">
-        <nav>
-          <NavLink to="/" end>
-            Home
-          </NavLink>{' '}
-          | <NavLink to="/news">News</NavLink> |{' '}
-          <NavLink to="/about">About</NavLink>
-          {isLoggedIn && (
-            <span>
-              {' '}
-              | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
-              <NavLink to="/pokemon">Pokemon</NavLink> |{' '}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  logout();
-                }}
-              >
-                Logout
-              </a>
-            </span>
-          )}
-        </nav>
+    <div className="main-content">
+      <nav>
+        <NavLink to="/" end>
+          Home
+        </NavLink>{' '}
+        |<NavLink to="/news">News</NavLink> |
+        <NavLink to="/about">About</NavLink>
+        {isLoggedIn ? (
+          <>
+            {' '}
+            | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
+            <NavLink to="/pokemon">Pokemon</NavLink> |{' '}
+            <button onClick={logout}>Logout</button>
+          </>
+        ) : (
+          <>
+            {' '}
+            | <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
+          </>
+        )}
+      </nav>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          {/* <Route
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        {/* <Route
             path="/dashboard"
             element={isLoggedIn ? <Dashboard /> : <Navigate to="/about" />}
           />
@@ -60,11 +56,10 @@ function App() {
             element={isLoggedIn ? <Pokemon /> : <Navigate to="/about" />}
           /> */}
 
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/pokemon" element={<Pokemon />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/pokemon" element={<Pokemon />} />
+      </Routes>
+    </div>
   );
 }
 

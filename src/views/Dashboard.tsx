@@ -41,7 +41,11 @@ function Dashboard() {
 
       <div className="row mb-3">
         <div className="col-12">
-          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Filter saved comments..."
+          />
         </div>
       </div>
 

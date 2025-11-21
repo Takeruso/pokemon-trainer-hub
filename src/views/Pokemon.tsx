@@ -1,3 +1,4 @@
+import SearchBar from '../components/SearchBar';
 import React, { useState, useEffect, useMemo } from 'react';
 
 interface PokemonData {
@@ -13,88 +14,71 @@ function Pokemon() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const itemsPerPage = 6;
-  const totalPages = 100;
 
-  async function fetchPokemonPage(offset: number, limit: number) {
-    try {
-      setLoading(true);
-      setError('');
-
-      const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`,
-      );
-      const data = await res.json();
-
-      const detailedData = await Promise.all(
-        data.results.map(async (item: { name: string; url: string }) => {
-          const res = await fetch(item.url);
-          const details = await res.json();
-          return {
-            name: item.name,
-            image: details.sprites.front_default,
-            type: details.types.map((t: any) => t.type.name).join(', '),
-          };
-        }),
-      );
-
-      setPokemons(detailedData);
-    } catch (err) {
-      console.error('Failed to fetch Pokémon data:', err);
-      setError('Failed to load Pokémon. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
+  // ① Load all Pokémon once on mount
   useEffect(() => {
-    const offset = (currentPage - 1) * itemsPerPage;
-    fetchPokemonPage(offset, itemsPerPage);
-  }, [currentPage]);
+    async function loadAll() {
+      try {
+        setLoading(true);
+        setError('');
 
-  useEffect(() => {
-    async function loadAllForSearch() {
-      if (searchQuery.trim() === '') {
-        const offset = (currentPage - 1) * itemsPerPage;
-        fetchPokemonPage(offset, itemsPerPage);
-      } else {
-        if (pokemons.length < 100) {
-          setLoading(true);
-          try {
-            const res = await fetch(
-              'https://pokeapi.co/api/v2/pokemon?limit=1000',
-            );
-            const data = await res.json();
-            const detailedData = await Promise.all(
-              data.results.map(async (item: { name: string; url: string }) => {
-                const res = await fetch(item.url);
-                const details = await res.json();
-                return {
-                  name: item.name,
-                  image: details.sprites.front_default,
-                  type: details.types.map((t: any) => t.type.name).join(', '),
-                };
-              }),
-            );
-            setPokemons(detailedData);
-          } catch (err) {
-            setError('Failed to load Pokémon.');
-          } finally {
-            setLoading(false);
-          }
-        }
-        setCurrentPage(1);
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+        const data = await res.json();
+
+        const detailedData: PokemonData[] = await Promise.all(
+          data.results.map(async (item: { name: string; url: string }) => {
+            const res = await fetch(item.url);
+            const details = await res.json();
+            return {
+              name: item.name,
+              image: details.sprites.front_default,
+              type: details.types
+                .map((t: { type: { name: string } }) => t.type.name)
+                .join(', '),
+            };
+          }),
+        );
+
+        setPokemons(detailedData);
+      } catch (err) {
+        console.error('Failed to fetch Pokémon data:', err);
+        setError('Failed to load Pokémon. Please try again later.');
+      } finally {
+        setLoading(false);
       }
     }
-    loadAllForSearch();
+
+    loadAll();
+  }, []);
+
+  // ② Reset page to 1 when search query changes
+  useEffect(() => {
+    setCurrentPage(1);
   }, [searchQuery]);
 
+  // ③ Search filter
   const filteredPokemons = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return pokemons;
+
     return pokemons.filter(
       (item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.type.toLowerCase().includes(searchQuery.toLowerCase()),
+        item.name.toLowerCase().includes(q) ||
+        item.type.toLowerCase().includes(q),
     );
   }, [pokemons, searchQuery]);
+
+  // ④ Total pages
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredPokemons.length / itemsPerPage),
+  );
+
+  // ⑤ Pagination (slice)
+  const paginated = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredPokemons.slice(start, start + itemsPerPage);
+  }, [filteredPokemons, currentPage]);
 
   const getPrimaryType = (typeString: string) => {
     return typeString.split(', ')[0].toLowerCase();
@@ -112,15 +96,11 @@ function Pokemon() {
 
       <div className="row">
         <div className="col-12">
-          <input
+          <SearchBar
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="searchPokemon col-12"
+            onChange={setSearchQuery}
             placeholder="Search Pokémon..."
           />
-          {searchQuery && (
-            <button onClick={() => setSearchQuery('')}>Clear Search</button>
-          )}
         </div>
       </div>
 
@@ -131,7 +111,7 @@ function Pokemon() {
 
           {!loading && !error && (
             <div>
-              {filteredPokemons.map((pokemon) => (
+              {paginated.map((pokemon) => (
                 <div
                   key={pokemon.name}
                   className={`pokemon-card border-${getPrimaryType(pokemon.type)}`}
