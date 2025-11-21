@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import Home from './views/Home';
 import Login from './views/Login';
@@ -16,13 +16,13 @@ function App() {
     <BrowserRouter basename="/cos30043/s102784225/">
       <div className="main-content">
         <nav>
-          <Link to="/">Home</Link> |{' '}
-          <Link to="/news">News</Link> |{' '}
-          <Link to="/about">About</Link>
+          <NavLink to="/" end>Home</NavLink> |{' '}
+          <NavLink to="/news">News</NavLink> |{' '}
+          <NavLink to="/about">About</NavLink>
           {isLoggedIn && (
             <span>
-              {' '}| <Link to="/dashboard">Dashboard</Link> |{' '}
-              <Link to="/pokemon">Pokemon</Link>
+              {' '}| <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
+              <NavLink to="/pokemon">Pokemon</NavLink>
               {' '}| <a href="#" onClick={(e) => { e.preventDefault(); logout(); }}>Logout</a>
             </span>
           )}
