@@ -36,12 +36,14 @@ function Home() {
 
       <div className="row">
         <div className="col-12" style={{ marginTop: '20px' }}>
-          <Link to="/login">
-            <button>🔑 Log In</button>
-          </Link>
-          <Link to="/signup" style={{ marginLeft: '10px' }}>
-            <button>📝 Sign Up</button>
-          </Link>
+          <div className="auth-button-group">
+            <Link to="/login" className="auth-button">
+              🔑 Log In
+            </Link>
+            <Link to="/signup" className="auth-button">
+              📝 Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </div>

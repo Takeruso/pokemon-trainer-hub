@@ -17,39 +17,56 @@ function App() {
       <div className="bg-layer" />
 
       <div className="content-wrapper">
+        <nav className="nav-bar">
+          <div className="nav-links">
+            <NavLink to="/" end className="nav-link">
+              Home
+            </NavLink>
+            <span>|</span>
+            <NavLink to="/news" className="nav-link">
+              News
+            </NavLink>
+            <span>|</span>
+            <NavLink to="/about" className="nav-link">
+              About
+            </NavLink>
+
+            {isLoggedIn ? (
+              <>
+                <span>|</span>
+                <NavLink to="/dashboard" className="nav-link">
+                  Dashboard
+                </NavLink>
+                <span>|</span>
+                <NavLink to="/pokemon" className="nav-link">
+                  Pokemon
+                </NavLink>
+                <span>|</span>
+                <button onClick={logout} className="nav-link nav-logout">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <span>|</span>
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
+                <span>|</span>
+                <Link to="/signup" className="nav-link">
+                  Signup
+                </Link>
+              </>
+            )}
+          </div>
+
+          <div className="nav-user">
+            {isLoggedIn && (
+              <span className="nav-welcome">Welcome, {currentUser}</span>
+            )}
+          </div>
+        </nav>
         <div className="main-content">
-          <nav className="nav-bar">
-            <div className="nav-links">
-              <NavLink to="/" end>
-                Home
-              </NavLink>{' '}
-              | <NavLink to="/news">News</NavLink> |{' '}
-              <NavLink to="/about">About</NavLink>
-              {isLoggedIn ? (
-                <>
-                  {' '}
-                  | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
-                  <NavLink to="/pokemon">Pokemon</NavLink> |{' '}
-                  <button onClick={logout} className="logout-button">
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  {' '}
-                  | <Link to="/login">Login</Link> |{' '}
-                  <Link to="/signup">Signup</Link>
-                </>
-              )}
-            </div>
-
-            <div className="nav-user">
-              {isLoggedIn && (
-                <span className="nav-welcome">Welcome, {currentUser}</span>
-              )}
-            </div>
-          </nav>
-
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/news" element={<News />} />
