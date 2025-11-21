@@ -49,6 +49,12 @@ function News() {
     return filteredNews.slice(start, start + perPage);
   }, [filteredNews, currentPage, perPage]);
 
+  const uniqueDates = useMemo(() => {
+    const dates = newsList.map((news) => news.date);
+    return [...new Set(dates)];
+  }, [newsList]);
+
+
   const resetFilters = () => {
     setSearchTitle('');
     setSearchContent('');
@@ -81,12 +87,17 @@ function News() {
               onChange={(e) => setSearchContent(e.target.value)}
               placeholder="Search by content..."
             />
-            <input
-              type="date"
+            <select
               value={searchDate}
               onChange={(e) => setSearchDate(e.target.value)}
-              placeholder="Date"
-            />
+            >
+              <option value="">All Dates</option>
+              {uniqueDates.map((date) => (
+                <option key={date} value={date}>
+                  {date}
+                </option>
+              ))}
+            </select>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}

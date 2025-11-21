@@ -1154,31 +1154,6 @@ nav .logout-button:hover::after {
   padding: 32px 16px 48px;
 }
 
-.main-section {
-  /* 各ページ用の縦方向レイアウト */
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.main-card {
-  /* Login / Signup / News の共通カード */
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(37, 99, 235, 0.45);
-  border-radius: 18px;
-  padding: 24px 20px;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.05),
-    0 6px 12px rgba(0, 0, 0, 0.12);
-}
-
-.main-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 16px;
-  color: #1f2937;
-}
-
 /* モバイル時の Login/Signup を強制センタリング */
 @media (max-width: 600px) {
   .container.login-container {
