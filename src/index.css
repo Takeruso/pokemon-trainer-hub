@@ -149,6 +149,18 @@ nav .logout-button:hover::after {
   width: 100%;
 }
 
+.nav-user {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.nav-welcome {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1e3a8a;
+}
+
 h1 {
   font-size: 3.2em;
   margin-bottom: 10px;
@@ -350,19 +362,33 @@ img {
 
 /* Shared card styles for general cards and Pokémon cards */
 .card,
+.comment-card,
 .pokemon-card {
-  background: var(--background-light);
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 6px 12px rgba(0, 0, 0, 0.12);
+
   transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.pokemon-card .pokemon-author {
+.card:hover,
+.comment-card:hover,
+.pokemon-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.comment-card .comment-author {
   display: block;
   font-size: 1.4em;
   font-weight: 700;
@@ -923,6 +949,7 @@ img {
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s;
+  margin-bottom: 20px;
 }
 
 .pokemon-image:hover {
@@ -930,7 +957,6 @@ img {
 }
 
 .pokemon-type {
-  margin-left: 20px;
   text-align: center;
 }
 
@@ -948,4 +974,93 @@ img {
     background-color: var(--primary-color);
     color: white;
   }
+}
+
+.about-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.about-card {
+  max-width: 800px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px 40px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.about-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #4b6cb7;
+  margin-bottom: 0.5rem;
+}
+
+.about-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #1b2b5b;
+}
+
+.about-lead {
+  margin: 0 auto 1.8rem;
+  max-width: 640px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.about-section {
+  margin-top: 1.8rem;
+  text-align: left;
+}
+
+.about-section-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: #1b2b5b;
+}
+
+.about-tech-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1.5rem;
+}
+
+.about-tech-grid li {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: #f3f6ff;
+  box-shadow: none;
+  border: 1px solid #e0e5f5;
+}
+
+.about-tech-grid strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.about-tech-grid span {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.about-list {
+  list-style: disc;
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.about-list li + li {
+  margin-top: 0.4rem;
 }

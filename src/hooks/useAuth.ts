@@ -1,5 +1,15 @@
+// src/hooks/useAuth.ts
 import { useEffect, useState } from 'react';
 import { registerUser, loginUser } from '../api/auth';
+
+export type LoginErrorReason =
+  | 'invalid-credentials'
+  | 'server-error'
+  | 'network-error';
+
+export type LoginResult =
+  | { ok: true }
+  | { ok: false; reason: LoginErrorReason; message: string };
 
 export function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -16,6 +26,7 @@ export function useAuth() {
     }
   }, [isLoggedIn, currentUser]);
 
+  // --- Register ---
   async function register(username: string, password: string): Promise<void> {
     const res = await registerUser(username, password);
 
@@ -26,14 +37,45 @@ export function useAuth() {
     }
   }
 
-  async function login(username: string, password: string): Promise<boolean> {
-    const res = await loginUser(username, password);
-    if (!res.ok) return false;
+  // --- Login ---
+  async function login(
+    username: string,
+    password: string,
+  ): Promise<LoginResult> {
+    try {
+      const res = await loginUser(username, password);
 
-    const data = await res.json().catch(() => null);
-    setIsLoggedIn(true);
-    setCurrentUser(data?.username ?? username);
-    return true;
+      if (res.ok) {
+        const data = await res.json().catch(() => null);
+        setIsLoggedIn(true);
+        setCurrentUser(data?.username ?? username);
+        return { ok: true };
+      }
+
+      // fail（401）
+      if (res.status === 401) {
+        return {
+          ok: false,
+          reason: 'invalid-credentials',
+          message: 'Invalid username or password',
+        };
+      }
+
+      // other server errors
+      const body = await res.json().catch(() => null);
+      return {
+        ok: false,
+        reason: 'server-error',
+        message: body?.message || 'Server error. Please try again later.',
+      };
+    } catch {
+      // network error
+      return {
+        ok: false,
+        reason: 'network-error',
+        message: 'Network error. Check your connection and try again.',
+      };
+    }
   }
 
   function logout() {

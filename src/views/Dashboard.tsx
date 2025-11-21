@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useComments } from '../hooks/useComments';
-import CommentForm from '../components/CommentForm'; // 名前は後で直せ
-import PokemonCard from '../components/PokemonCard'; // 同上
+import CommentForm from '../components/CommentForm';
+import CommentCard from '../components/CommentCard';
 import SearchBar from '../components/SearchBar';
 
 function Dashboard() {
@@ -27,6 +27,9 @@ function Dashboard() {
       <div className="row">
         <div className="col-12">
           <h1>Dashboard Hub</h1>
+          <p className="text-muted">
+            Manage your comments and likes after logging in.
+          </p>
         </div>
       </div>
 
@@ -52,8 +55,8 @@ function Dashboard() {
       <div className="row">
         {filtered.map((comment) => (
           <div className="col-12" key={comment._id}>
-            <PokemonCard
-              pokemon={comment} // 型が name/comment/likes ならそのまま使える
+            <CommentCard
+              comment={comment}
               onLike={likeComment}
               onDelete={removeComment}
               onEdit={editComment}

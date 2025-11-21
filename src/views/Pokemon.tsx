@@ -92,6 +92,10 @@ function Pokemon() {
     <div className="container">
       <div className="row">
         <h1 className="col-12 mt-3">Pokémon Spotlight</h1>
+        <p className="text-muted">
+          This page fetches data from the public PokéAPI and shows a list of
+          Pokémon.
+        </p>
       </div>
 
       <div className="row">

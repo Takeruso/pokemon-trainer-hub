@@ -10,31 +10,44 @@ import News from './views/News';
 import About from './views/About';
 
 function App() {
-  const { isLoggedIn, logout } = useAuthContext();
+  const { isLoggedIn, logout, currentUser } = useAuthContext();
 
   return (
     <div className="main-content">
-      <nav>
-        <NavLink to="/" end>
-          Home
-        </NavLink>{' '}
-        |<NavLink to="/news">News</NavLink> |
-        <NavLink to="/about">About</NavLink>
-        {isLoggedIn ? (
-          <>
-            {' '}
-            | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
-            <NavLink to="/pokemon">Pokemon</NavLink> |{' '}
-            <button onClick={logout} className="logout-button">
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            {' '}
-            | <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
-          </>
-        )}
+      <nav className="nav-bar">
+        {/* left side: links */}
+        <div className="nav-links">
+          <NavLink to="/" end>
+            Home
+          </NavLink>{' '}
+          | <NavLink to="/news">News</NavLink> |{' '}
+          <NavLink to="/about">About</NavLink>
+          {isLoggedIn ? (
+            <>
+              {' '}
+              | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
+              <NavLink to="/pokemon">Pokemon</NavLink>|{' '}
+              <button onClick={logout} className="logout-button">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              {' '}
+              | <Link to="/login">Login</Link> |{' '}
+              <Link to="/signup">Signup</Link>
+            </>
+          )}
+        </div>
+
+        {/* right side: Welcome (separate CSS target) */}
+        <div className="nav-user">
+          {isLoggedIn && (
+            <>
+              <span className="nav-welcome">Welcome, {currentUser}</span>
+            </>
+          )}
+        </div>
       </nav>
 
       <Routes>

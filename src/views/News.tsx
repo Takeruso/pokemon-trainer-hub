@@ -62,6 +62,9 @@ function News() {
       <div className="row">
         <div className="col-12 mt-3">
           <h1>Pokémon News</h1>
+          <p className="text-muted">
+            Sample news feed rendered from a local JSON file.
+          </p>
         </div>
       </div>
 

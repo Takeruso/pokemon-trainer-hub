@@ -1,4 +1,6 @@
+// src/views/Login.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 import FormInput from '../components/FormInput';
 import FormAlert from '../components/FormAlert';
@@ -7,13 +9,23 @@ import FormWrapper from '../components/FormWrapper';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [status, setStatus] = useState<
+    | 'idle'
+    | 'submitting'
+    | 'success'
+    | 'invalid'
+    | 'server-error'
+    | 'network-error'
+  >('idle');
+  const [message, setMessage] = useState('');
   const [errors, setErrors] = useState<{
     username?: string;
     password?: string;
   }>({});
+
   const { login } = useAuthContext();
+
+  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors: { username?: string; password?: string } = {};
@@ -27,15 +39,42 @@ function Login() {
     e.preventDefault();
     if (!validate()) return;
 
-    const ok = await login(username, password);
-    if (ok) {
-      setSuccess('Login successful');
-      setError('');
-    } else {
-      setError('Invalid username or password');
-      setSuccess('');
+    setStatus('submitting');
+    setMessage('');
+
+    const result = await login(username, password);
+
+    if (result.ok) {
+      setStatus('success');
+      setMessage('Login successful');
+      navigate('/dashboard');
+      return;
+    }
+
+    switch (result.reason) {
+      case 'invalid-credentials':
+        setStatus('invalid');
+        setMessage(result.message);
+        break;
+      case 'server-error':
+        setStatus('server-error');
+        setMessage(result.message);
+        break;
+      case 'network-error':
+        setStatus('network-error');
+        setMessage(result.message);
+        break;
     }
   }
+
+  const alertVariant =
+    status === 'success'
+      ? 'success'
+      : status === 'invalid'
+        ? 'warning'
+        : status === 'server-error' || status === 'network-error'
+          ? 'danger'
+          : 'danger';
 
   return (
     <div className="container">
@@ -63,15 +102,16 @@ function Login() {
           />
 
           <div className="mb-3">
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={status === 'submitting'}>
+              {status === 'submitting' ? 'Submitting...' : 'Submit'}
+            </button>
           </div>
         </FormWrapper>
 
         <div className="col-12 mb-3">
-          <FormAlert
-            message={success || error}
-            variant={success ? 'success' : 'danger'}
-          />
+          {message && (
+            <FormAlert message={message} variant={alertVariant as any} />
+          )}
         </div>
       </div>
     </div>
