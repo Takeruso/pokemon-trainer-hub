@@ -16,7 +16,7 @@ function Home() {
           </p>
         </div>
       </div>
-      
+
       <div className="row">
         <div className="col-12">
           <div className="image-container">
@@ -33,7 +33,7 @@ function Home() {
           </div>
         </div>
       </div>
-      
+
       <div className="row">
         <div className="col-12" style={{ marginTop: '20px' }}>
           <Link to="/login">

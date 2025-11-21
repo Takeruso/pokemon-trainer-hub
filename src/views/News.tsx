@@ -95,7 +95,10 @@ function News() {
                 </option>
               ))}
             </select>
-            {(searchTitle || searchContent || searchDate || selectedCategory) && (
+            {(searchTitle ||
+              searchContent ||
+              searchDate ||
+              selectedCategory) && (
               <button className="reset-button" onClick={resetFilters}>
                 Clear Search
               </button>

@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+} from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import Home from './views/Home';
 import Login from './views/Login';
@@ -16,14 +22,25 @@ function App() {
     <BrowserRouter basename="/cos30043/s102784225/">
       <div className="main-content">
         <nav>
-          <NavLink to="/" end>Home</NavLink> |{' '}
-          <NavLink to="/news">News</NavLink> |{' '}
+          <NavLink to="/" end>
+            Home
+          </NavLink>{' '}
+          | <NavLink to="/news">News</NavLink> |{' '}
           <NavLink to="/about">About</NavLink>
           {isLoggedIn && (
             <span>
-              {' '}| <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
-              <NavLink to="/pokemon">Pokemon</NavLink>
-              {' '}| <a href="#" onClick={(e) => { e.preventDefault(); logout(); }}>Logout</a>
+              {' '}
+              | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
+              <NavLink to="/pokemon">Pokemon</NavLink> |{' '}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  logout();
+                }}
+              >
+                Logout
+              </a>
             </span>
           )}
         </nav>
@@ -34,14 +51,17 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route
+          {/* <Route
             path="/dashboard"
             element={isLoggedIn ? <Dashboard /> : <Navigate to="/about" />}
           />
           <Route
             path="/pokemon"
             element={isLoggedIn ? <Pokemon /> : <Navigate to="/about" />}
-          />
+          /> */}
+
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pokemon" element={<Pokemon />} />
         </Routes>
       </div>
     </BrowserRouter>

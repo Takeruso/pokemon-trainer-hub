@@ -22,7 +22,8 @@ export function usePokemons() {
           },
           {
             name: 'Charlie',
-            comment: 'What is your favourite UI framework? Bootstrap? Tailwind?',
+            comment:
+              'What is your favourite UI framework? Bootstrap? Tailwind?',
             likes: 1,
           },
         ];
@@ -71,7 +72,7 @@ export function usePokemons() {
       console.log('🧪 debug: Liked ID =', id);
       await updateItem(updatedPokemon);
       setPokemons((prev) =>
-        prev.map((p) => (p._id === id ? updatedPokemon : p))
+        prev.map((p) => (p._id === id ? updatedPokemon : p)),
       );
     }
   };

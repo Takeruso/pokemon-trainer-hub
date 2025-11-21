@@ -21,7 +21,7 @@ function Pokemon() {
       setError('');
 
       const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`,
       );
       const data = await res.json();
 
@@ -34,7 +34,7 @@ function Pokemon() {
             image: details.sprites.front_default,
             type: details.types.map((t: any) => t.type.name).join(', '),
           };
-        })
+        }),
       );
 
       setPokemons(detailedData);
@@ -60,7 +60,9 @@ function Pokemon() {
         if (pokemons.length < 100) {
           setLoading(true);
           try {
-            const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
+            const res = await fetch(
+              'https://pokeapi.co/api/v2/pokemon?limit=1000',
+            );
             const data = await res.json();
             const detailedData = await Promise.all(
               data.results.map(async (item: { name: string; url: string }) => {
@@ -71,7 +73,7 @@ function Pokemon() {
                   image: details.sprites.front_default,
                   type: details.types.map((t: any) => t.type.name).join(', '),
                 };
-              })
+              }),
             );
             setPokemons(detailedData);
           } catch (err) {
@@ -90,7 +92,7 @@ function Pokemon() {
     return pokemons.filter(
       (item) =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.type.toLowerCase().includes(searchQuery.toLowerCase())
+        item.type.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [pokemons, searchQuery]);
 
@@ -147,31 +149,29 @@ function Pokemon() {
           )}
         </div>
 
-        <div className="row">
-          <div className="col-12">
-            <div className="pagination-container">
-              <button
-                className="pagination"
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1 || loading}
-                aria-label="Previous page"
-              >
-                Prev
-              </button>
+        <div className="col-12">
+          <div className="pagination-container">
+            <button
+              className="pagination"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1 || loading}
+              aria-label="Previous page"
+            >
+              Prev
+            </button>
 
-              <span className="page-info">
-                Page {currentPage} of {totalPages}
-              </span>
+            <span className="page-info">
+              Page {currentPage} of {totalPages}
+            </span>
 
-              <button
-                className="pagination"
-                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages || loading}
-                aria-label="Next page"
-              >
-                Next
-              </button>
-            </div>
+            <button
+              className="pagination"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages || loading}
+              aria-label="Next page"
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>

@@ -13,9 +13,9 @@ function Dashboard() {
   const filteredPokemons = useMemo(
     () =>
       pokemons.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()),
       ),
-    [pokemons, searchQuery]
+    [pokemons, searchQuery],
   );
 
   const handleAddPokemon = async (data: { name: string; comment: string }) => {

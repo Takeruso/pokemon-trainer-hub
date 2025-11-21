@@ -9,11 +9,13 @@ const typeEmojis: Record<string, string> = {
 
 const typeData: Record<string, { image: string; recommended: string }> = {
   Mountain: {
-    image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/383.png',
+    image:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/383.png',
     recommended: 'Groudon',
   },
   Ocean: {
-    image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/382.png',
+    image:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/382.png',
     recommended: 'Kyogre',
   },
 };
@@ -92,7 +94,9 @@ function About() {
                     checked={selectedType === type}
                     onChange={(e) => setSelectedType(e.target.value)}
                   />
-                  <span>{typeEmojis[type]} {type}</span>
+                  <span>
+                    {typeEmojis[type]} {type}
+                  </span>
                 </label>
               ))}
             </div>
@@ -105,7 +109,8 @@ function About() {
           <div className="col-12">
             <div className="result">
               <h3>
-                Welcome, {displayName}! You chose <strong>{selectedType}</strong>.
+                Welcome, {displayName}! You chose{' '}
+                <strong>{selectedType}</strong>.
               </h3>
               <p>
                 You might like: <strong>{recommendedPokemon}</strong>

@@ -4,10 +4,10 @@ const API_BASE = '/api';
 
 export function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
-    localStorage.getItem('isLoggedIn') === 'true'
+    localStorage.getItem('isLoggedIn') === 'true',
   );
   const [currentUser, setCurrentUser] = useState<string>(
-    localStorage.getItem('currentUser') || ''
+    localStorage.getItem('currentUser') || '',
   );
 
   useEffect(() => {

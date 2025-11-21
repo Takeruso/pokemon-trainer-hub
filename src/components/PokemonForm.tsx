@@ -6,9 +6,7 @@ interface PokemonFormProps {
 }
 
 function PokemonForm({ initialData, onSave }: PokemonFormProps) {
-  const [form, setForm] = useState(
-    initialData || { name: '', comment: '' }
-  );
+  const [form, setForm] = useState(initialData || { name: '', comment: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +32,9 @@ function PokemonForm({ initialData, onSave }: PokemonFormProps) {
               <div className="col-12">
                 <textarea
                   value={form.comment}
-                  onChange={(e) => setForm({ ...form, comment: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, comment: e.target.value })
+                  }
                   placeholder="Enter your comments"
                   className="form-input mb-2"
                   rows={3}

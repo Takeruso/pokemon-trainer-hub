@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import FormInput from '../components/FormInput';
+import FormAlert from '../components/FormAlert';
+import FormWrapper from '../components/FormWrapper';
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
-  const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{
+    username?: string;
+    password?: string;
+  }>({});
   const { register } = useAuth();
 
   const validate = () => {
@@ -37,49 +43,39 @@ function Signup() {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-12 mt-3">
+      <div className="row justify-content-center">
+        <div className="col-12 mt-3 text-center">
           <h2>Sign Up</h2>
         </div>
-        <form onSubmit={handleSignup}>
-          <div className="mb-3">
-            <input
-              name="username"
-              className="form-input"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            {errors.username && (
-              <div className="mt-1 text-danger small">{errors.username}</div>
-            )}
-          </div>
 
-          <div className="mb-3">
-            <input
-              name="password"
-              type="password"
-              className="form-input"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && (
-              <div className="mt-1 text-danger small">{errors.password}</div>
-            )}
-          </div>
-          
+        <FormWrapper onSubmit={handleSignup}>
+          <FormInput
+            name="username"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            error={errors.username}
+          />
+
+          <FormInput
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={errors.password}
+          />
+
           <div className="mb-3">
             <button type="submit">Submit</button>
           </div>
-        </form>
-        
+        </FormWrapper>
+
         <div className="col-12">
-          {error && (
-            <div className={isSuccess ? 'alert alert-success' : 'alert alert-danger'}>
-              {error}
-            </div>
-          )}
+          <FormAlert
+            message={error}
+            variant={isSuccess ? 'success' : 'danger'}
+          />
         </div>
       </div>
     </div>

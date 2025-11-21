@@ -55,7 +55,9 @@ function PokemonCard({ pokemon, onLike, onDelete, onEdit }: PokemonCardProps) {
             ) : (
               <textarea
                 value={local.comment}
-                onChange={(e) => setLocal({ ...local, comment: e.target.value })}
+                onChange={(e) =>
+                  setLocal({ ...local, comment: e.target.value })
+                }
                 className="form-control"
               />
             )}
@@ -67,10 +69,16 @@ function PokemonCard({ pokemon, onLike, onDelete, onEdit }: PokemonCardProps) {
 
           {!editing ? (
             <div className="col-12">
-              <button onClick={handleLike} className="btn btn-outline-primary me-2">
+              <button
+                onClick={handleLike}
+                className="btn btn-outline-primary me-2"
+              >
                 👍 Like
               </button>
-              <button onClick={startEdit} className="btn btn-outline-warning me-2">
+              <button
+                onClick={startEdit}
+                className="btn btn-outline-warning me-2"
+              >
                 ✏️ Edit
               </button>
               <button
@@ -82,10 +90,16 @@ function PokemonCard({ pokemon, onLike, onDelete, onEdit }: PokemonCardProps) {
             </div>
           ) : (
             <div className="col-12">
-              <button onClick={saveEdit} className="btn btn-outline-success me-2">
+              <button
+                onClick={saveEdit}
+                className="btn btn-outline-success me-2"
+              >
                 💾 Save
               </button>
-              <button onClick={cancelEdit} className="btn btn-outline-secondary">
+              <button
+                onClick={cancelEdit}
+                className="btn btn-outline-secondary"
+              >
                 ❌ Cancel
               </button>
             </div>

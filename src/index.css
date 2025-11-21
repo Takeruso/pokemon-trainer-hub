@@ -43,7 +43,7 @@ body {
 }
 
 #root::before {
-  content: "";
+  content: '';
   position: fixed;
   top: 0;
   left: 0;
@@ -75,13 +75,15 @@ nav a {
   font-size: 1.4em;
   color: var(--primary-color);
   text-decoration: none;
-  font-weight: bold; 
-  transition: color 0.3s, border-bottom 0.3s;
+  font-weight: bold;
+  transition:
+    color 0.3s,
+    border-bottom 0.3s;
   position: relative;
 }
 
 nav a::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: -2px;
@@ -108,7 +110,7 @@ nav a.active {
 }
 
 nav a.active::before {
-  content: "▶ ";
+  content: '▶ ';
   font-size: 0.8em;
 }
 
@@ -119,7 +121,9 @@ h1 {
   font-weight: bold;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-bottom: 20px;
 }
 
@@ -129,7 +133,9 @@ p {
   margin: 0 auto 20px auto;
 }
 
-input, select, button {
+input,
+select,
+button {
   margin: 5px;
   padding: 0.5em;
   border: 1px solid #ccc;
@@ -145,7 +151,9 @@ button {
   margin: 10px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s ease;
+  transition:
+    background 0.3s,
+    transform 0.2s ease;
 }
 
 .button-container {
@@ -173,7 +181,7 @@ img {
   display: block;
   margin: 0 auto;
   border-radius: 8px;
-  max-width: 600px; 
+  max-width: 600px;
 }
 
 .main-content {
@@ -191,7 +199,9 @@ img {
 .main-content:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 /* Media queries */
@@ -279,7 +289,9 @@ img {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 /* Type-specific border colors */
@@ -409,28 +421,66 @@ img {
 }
 
 /* Bootstrap utility classes */
-.mt-1 { margin-top: 0.25rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-5 { margin-top: 3rem; }
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 1rem;
+}
+.mt-4 {
+  margin-top: 1.5rem;
+}
+.mt-5 {
+  margin-top: 3rem;
+}
 
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 1rem; }
-.mb-4 { margin-bottom: 1.5rem; }
-.mb-5 { margin-bottom: 3rem; }
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+.mb-5 {
+  margin-bottom: 3rem;
+}
 
-.d-flex { display: flex; }
-.justify-content-center { justify-content: center; }
-.align-items-center { align-items: center; }
-.flex-wrap { flex-wrap: wrap; }
-.gap-3 { gap: 1rem; }
-.text-center { text-align: center; }
-.w-auto { width: auto; }
+.d-flex {
+  display: flex;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center {
+  align-items: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.gap-3 {
+  gap: 1rem;
+}
+.text-center {
+  text-align: center;
+}
+.w-auto {
+  width: auto;
+}
 
-.text-danger { color: #dc3545; }
-.small { font-size: 0.875rem; }
+.text-danger {
+  color: #dc3545;
+}
+.small {
+  font-size: 0.875rem;
+}
 
 .alert {
   position: relative;
@@ -464,8 +514,11 @@ img {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 .btn-outline-primary {
@@ -556,7 +609,9 @@ img {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 .form-control:focus {
@@ -647,7 +702,9 @@ img {
   font-size: 1em;
   min-width: 200px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .filters input:focus,
@@ -676,7 +733,9 @@ img {
   border-radius: 8px;
   font-size: 1em;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition:
+    background 0.3s,
+    transform 0.2s;
 }
 
 .reset-button:hover {
@@ -764,7 +823,9 @@ img {
   border-radius: 6px;
   font-size: 1em;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition:
+    background 0.3s,
+    transform 0.2s;
 }
 
 .pagination:hover:not(:disabled) {
@@ -806,7 +867,10 @@ img {
   a:hover {
     color: #747bff;
   }
+
+  /* Ensure buttons keep the primary theme color in light mode */
   button {
-    background-color: #f9f9f9;
+    background-color: var(--primary-color);
+    color: white;
   }
 }
