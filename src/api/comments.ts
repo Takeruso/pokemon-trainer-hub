@@ -1,5 +1,5 @@
 // src/api/comments.ts
-const API_BASE = 'http://localhost:3000/api/comments';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000/api';
 
 export interface Comment {
   _id?: string;
@@ -9,7 +9,7 @@ export interface Comment {
 }
 
 export async function getAllComments(): Promise<Comment[]> {
-  const res = await fetch(API_BASE);
+  const res = await fetch(`${API_BASE}/comments`);
   if (!res.ok) throw new Error('Failed to fetch comments');
   return await res.json();
 }
@@ -17,7 +17,7 @@ export async function getAllComments(): Promise<Comment[]> {
 export async function addComment(
   comment: Omit<Comment, '_id'>,
 ): Promise<Comment> {
-  const res = await fetch(API_BASE, {
+  const res = await fetch(`${API_BASE}/comments`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(comment),
@@ -27,7 +27,7 @@ export async function addComment(
 }
 
 export async function updateComment(comment: Comment): Promise<Comment> {
-  const res = await fetch(`${API_BASE}/${comment._id}`, {
+  const res = await fetch(`${API_BASE}/comments/${comment._id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(comment),
@@ -37,6 +37,6 @@ export async function updateComment(comment: Comment): Promise<Comment> {
 }
 
 export async function deleteComment(id: string): Promise<void> {
-  const res = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
+  const res = await fetch(`${API_BASE}/comments/${id}`, { method: 'DELETE' });
   if (!res.ok) throw new Error('Failed to delete comment');
 }

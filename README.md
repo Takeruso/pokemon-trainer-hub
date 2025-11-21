@@ -8,18 +8,18 @@ A small full-stack demo application showcasing **authentication**, **comment CRU
 
 **Frontend**
 
-* React + TypeScript
-* Vite
+- React + TypeScript
+- Vite
 
 **Backend**
 
-* Node.js + Express
-* Mongoose (MongoDB Atlas)
+- Node.js + Express
+- Mongoose (MongoDB Atlas)
 
 **External Services**
 
-* PokéAPI (REST)
-* Local JSON-based News feed
+- PokéAPI (REST)
+- Local JSON-based News feed
 
 ---
 
@@ -27,22 +27,22 @@ A small full-stack demo application showcasing **authentication**, **comment CRU
 
 ### Authentication
 
-* User signup & login
-* Password hashing via **bcrypt**
+- User signup & login
+- Password hashing via **bcrypt**
 
 ### Comments Dashboard
 
-* Create / Edit / Delete / Like comments
-* Stored in MongoDB Atlas
-* Includes live search filtering
+- Create / Edit / Delete / Like comments
+- Stored in MongoDB Atlas
+- Includes live search filtering
 
 ### Pokémon Viewer
 
-* Fetches Pokémon details (name, type, image) from PokéAPI
+- Fetches Pokémon details (name, type, image) from PokéAPI
 
 ### News Page
 
-* Renders articles from a local JSON feed
+- Renders articles from a local JSON feed
 
 ---
 

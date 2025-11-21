@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   show: boolean;
@@ -6,7 +6,11 @@ interface Props {
   onCancel: () => void;
 }
 
-export default function DeleteConfirmModal({ show, onConfirm, onCancel }: Props) {
+export default function DeleteConfirmModal({
+  show,
+  onConfirm,
+  onCancel,
+}: Props) {
   if (!show) return null;
 
   return (

@@ -89,10 +89,7 @@ export default function CommentCard({
             >
               ✏️ Edit
             </button>
-            <button
-              onClick={handleDelete}
-              className="btn btn-outline-danger"
-            >
+            <button onClick={handleDelete} className="btn btn-outline-danger">
               🗑 Delete
             </button>
             <DeleteConfirmModal
