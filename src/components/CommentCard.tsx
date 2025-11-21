@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Comment } from '../api/comments';
+import DeleteConfirmModal from './DeleteConfirmModal';
 
 interface CommentCardProps {
   comment: Comment;
@@ -34,6 +35,16 @@ export default function CommentCard({
   const cancelEdit = () => {
     setDraft({ ...comment });
     setIsEditing(false);
+  };
+
+  const [confirming, setConfirming] = useState(false);
+  const handleDelete = () => {
+    if (comment._id) setConfirming(true);
+  };
+
+  const confirmDelete = () => {
+    if (comment._id) onDelete(comment._id);
+    setConfirming(false);
   };
 
   return (
@@ -79,11 +90,16 @@ export default function CommentCard({
               ✏️ Edit
             </button>
             <button
-              onClick={() => comment._id && onDelete(comment._id)}
+              onClick={handleDelete}
               className="btn btn-outline-danger"
             >
               🗑 Delete
             </button>
+            <DeleteConfirmModal
+              show={confirming}
+              onConfirm={confirmDelete}
+              onCancel={() => setConfirming(false)}
+            />
           </div>
         ) : (
           <div>
