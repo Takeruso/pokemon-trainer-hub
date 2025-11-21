@@ -39,7 +39,7 @@ function PokemonCard({ pokemon, onLike, onDelete, onEdit }: PokemonCardProps) {
         <div className="row">
           <div className="col-12 d-flex justify-content-between">
             {!editing ? (
-              <h5 className="card-title">{local.name}</h5>
+              <span className="pokemon-author">{local.name}</span>
             ) : (
               <input
                 value={local.name}

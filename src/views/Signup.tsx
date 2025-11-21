@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import { useAuthContext } from '../context/AuthContext';
 import FormInput from '../components/FormInput';
 import FormAlert from '../components/FormAlert';
 import FormWrapper from '../components/FormWrapper';
@@ -13,7 +13,7 @@ function Signup() {
     username?: string;
     password?: string;
   }>({});
-  const { register } = useAuth();
+  const { register } = useAuthContext();
 
   const validate = () => {
     const newErrors: { username?: string; password?: string } = {};

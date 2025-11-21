@@ -125,6 +125,30 @@ nav .auth-link {
   opacity: 0.8;
 }
 
+nav .logout-button {
+  all: unset;
+  font-size: 1.4em;
+  color: var(--primary-color);
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+}
+
+nav .logout-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: width 0.3s;
+}
+
+nav .logout-button:hover::after {
+  width: 100%;
+}
+
 h1 {
   font-size: 3.2em;
   margin-bottom: 10px;
@@ -336,6 +360,13 @@ img {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
+}
+
+.pokemon-card .pokemon-author {
+  display: block;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 /* Type-specific border colors */

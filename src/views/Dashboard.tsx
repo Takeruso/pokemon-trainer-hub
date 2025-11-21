@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useComments } from '../hooks/useComments';
-import PokemonForm from '../components/PokemonForm'; // 名前は後で直せ
+import CommentForm from '../components/CommentForm'; // 名前は後で直せ
 import PokemonCard from '../components/PokemonCard'; // 同上
 import SearchBar from '../components/SearchBar';
 
@@ -32,7 +32,7 @@ function Dashboard() {
 
       <div className="row mb-3">
         <div className="col-12">
-          <PokemonForm
+          <CommentForm
             initialData={{ name: '', comment: '' }}
             onSave={handleAdd}
           />

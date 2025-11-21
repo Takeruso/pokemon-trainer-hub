@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  Routes,
-  Route,
-  NavLink,
-  Link,
-  Navigate,
-  // Navigate,
-} from 'react-router-dom';
-import { useAuth } from './hooks/useAuth';
+import { Routes, Route, NavLink, Link, Navigate } from 'react-router-dom';
+import { useAuthContext } from './context/AuthContext';
 import Home from './views/Home';
 import Login from './views/Login';
 import Signup from './views/Signup';
@@ -17,7 +10,7 @@ import News from './views/News';
 import About from './views/About';
 
 function App() {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout } = useAuthContext();
 
   return (
     <div className="main-content">
@@ -32,7 +25,9 @@ function App() {
             {' '}
             | <NavLink to="/dashboard">Dashboard</NavLink> |{' '}
             <NavLink to="/pokemon">Pokemon</NavLink> |{' '}
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout} className="logout-button">
+              Logout
+            </button>
           </>
         ) : (
           <>

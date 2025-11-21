@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-interface PokemonFormProps {
+interface CommentFormProps {
   initialData?: { name: string; comment: string };
   onSave: (data: { name: string; comment: string }) => void;
 }
 
-function PokemonForm({ initialData, onSave }: PokemonFormProps) {
+function CommentForm({ initialData, onSave }: CommentFormProps) {
   const [form, setForm] = useState(initialData || { name: '', comment: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -54,4 +54,4 @@ function PokemonForm({ initialData, onSave }: PokemonFormProps) {
   );
 }
 
-export default PokemonForm;
+export default CommentForm;
