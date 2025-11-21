@@ -4,6 +4,7 @@ import {
   Route,
   NavLink,
   Link,
+  Navigate,
   // Navigate,
 } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
@@ -47,17 +48,14 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <Route
-            path="/dashboard"
-            element={isLoggedIn ? <Dashboard /> : <Navigate to="/about" />}
-          />
-          <Route
-            path="/pokemon"
-            element={isLoggedIn ? <Pokemon /> : <Navigate to="/about" />}
-          /> */}
-
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/pokemon" element={<Pokemon />} />
+        <Route
+          path="/dashboard"
+          element={isLoggedIn ? <Dashboard /> : <Navigate to="/about" />}
+        />
+        <Route
+          path="/pokemon"
+          element={isLoggedIn ? <Pokemon /> : <Navigate to="/about" />}
+        />
       </Routes>
     </div>
   );
