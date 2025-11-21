@@ -50,7 +50,7 @@
                 type.toLowerCase(),
               ]"
             >
-              <input type="radio" :value="type" v-model="selectedType" />
+              <input v-model="selectedType" type="radio" :value="type" />
               <span>{{ typeEmojis[type] }} {{ type }}</span>
             </label>
           </div>
@@ -72,8 +72,8 @@
           <transition name="fade" mode="out-in">
             <img
               v-if="typeImage"
-              :src="typeImage"
               :key="selectedType"
+              :src="typeImage"
               :alt="`${selectedType} Pokémon`"
               class="type-image"
             />

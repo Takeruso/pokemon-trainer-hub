@@ -19,7 +19,7 @@
     </div>
 
     <div class="row">
-      <div class="col-12" v-for="pokemon in filteredPokemons" :key="pokemon.id">
+      <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="col-12">
         <PokemonCard
           :pokemon="pokemon"
           @like="likePokemon"
@@ -33,16 +33,16 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useAuth } from '@/composables/useAuth';
+// import { useAuth } from '@/composables/useAuth';
 import { usePokemons } from '@/composables/usePokemons';
 
 import PokemonForm from '../components/PokemonForm.vue';
 import PokemonCard from '../components/PokemonCard.vue';
 import SearchBar from '../components/SearchBar.vue';
 
-const { currentUser } = useAuth();
+// const { currentUser } = useAuth(); // Unused variable
 
-const userId = currentUser.id;
+// const userId = currentUser.id; // Unused variable
 const { pokemons, addPokemon, deletePokemon, editPokemon, likePokemon } =
   usePokemons();
 
@@ -56,8 +56,8 @@ const filteredPokemons = computed(() =>
 
 const newPokemon = ref({ name: '', comment: '', isFavorite: false });
 
-const startEdit = (pokemon) => {
-  newPokemon.value = { ...pokemon };
-  isEditing.value = true;
-};
+// const startEdit = (pokemon) => {
+//   newPokemon.value = { ...pokemon };
+//   isEditing.value = true;
+// };
 </script>

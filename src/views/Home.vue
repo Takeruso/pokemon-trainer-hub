@@ -40,10 +40,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
-const showLogin = ref(false);
+// const showLogin = ref(false); // Unused variable
 </script>
 
 <style scoped>

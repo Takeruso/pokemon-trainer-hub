@@ -12,7 +12,7 @@
         <div class="filters">
           <input v-model="searchTitle" placeholder="Search by title..." />
           <input v-model="searchContent" placeholder="Search by content..." />
-          <input type="date" v-model="searchDate" placeholder="Date" />
+          <input v-model="searchDate" type="date" placeholder="Date" />
           <select v-model="selectedCategory">
             <option value="">All Categories</option>
             <option
@@ -60,9 +60,9 @@
         <div class="pagination-container">
           <button
             class="pagination"
-            @click="prevPage"
             :disabled="currentPage === 1 || loading"
             aria-label="Previous page"
+            @click="prevPage"
           >
             Prev
           </button>
@@ -73,9 +73,9 @@
 
           <button
             class="pagination"
-            @click="nextPage"
             :disabled="currentPage === totalPages || loading"
             aria-label="Next page"
+            @click="nextPage"
           >
             Next
           </button>
@@ -130,6 +130,9 @@ export default {
       return this.filteredNews.slice(start, start + this.perPage);
     },
   },
+  mounted() {
+    this.newsList = newsData;
+  },
   methods: {
     nextPage() {
       if (this.currentPage < this.totalPages) {
@@ -148,9 +151,6 @@ export default {
       this.selectedCategory = '';
       this.currentPage = 1;
     },
-  },
-  mounted() {
-    this.newsList = newsData;
   },
 };
 </script>

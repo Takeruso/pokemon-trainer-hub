@@ -37,7 +37,7 @@ const props = defineProps(['initialData']);
 const emit = defineEmits(['save']);
 const initialState = {
   name: '',
-  comment: ''
+  comment: '',
 };
 
 const form = reactive({ ...props.initialData });

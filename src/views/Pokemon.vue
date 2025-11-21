@@ -43,9 +43,9 @@
           <div class="pagination-container">
             <button
               class="pagination"
-              @click="prevPage"
               :disabled="currentPage === 1 || loading"
               aria-label="Previous page"
+              @click="prevPage"
             >
               Prev
             </button>
@@ -56,9 +56,9 @@
 
             <button
               class="pagination"
-              @click="nextPage"
               :disabled="currentPage === totalPages || loading"
               aria-label="Next page"
+              @click="nextPage"
             >
               Next
             </button>

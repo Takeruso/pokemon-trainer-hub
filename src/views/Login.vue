@@ -13,7 +13,7 @@
             placeholder="Username"
             rules="required"
           />
-          <ErrorMessage name="username" v-slot="{ message }">
+          <ErrorMessage v-slot="{ message }" name="username">
             <div class="text-danger small mt-1">{{ message }}</div>
           </ErrorMessage>
         </div>
@@ -27,17 +27,17 @@
             placeholder="Password"
             rules="required"
           />
-          <ErrorMessage name="password" v-slot="{ message }">
+          <ErrorMessage v-slot="{ message }" name="password">
             <div class="text-danger small mt-1">{{ message }}</div>
           </ErrorMessage>
         </div>
 
         <div class="col-12 mb-3">
-          <div class="col-12" v-if="success">
+          <div v-if="success" class="col-12">
             <div class="alert alert-success">{{ success }}</div>
           </div>
 
-          <div class="col-12" v-if="error">
+          <div v-if="error" class="col-12">
             <div class="alert alert-danger">{{ error }}</div>
           </div>
         </div>
@@ -55,8 +55,8 @@ import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import { required } from '@vee-validate/rules';
 import { useAuth } from '@/composables/useAuth';
 
-const username = ref('');
-const password = ref('');
+// const username = ref(''); // Unused - form values come from vee-validate
+// const password = ref(''); // Unused - form values come from vee-validate
 const error = ref('');
 const success = ref('');
 const { login } = useAuth();

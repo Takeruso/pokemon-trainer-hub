@@ -13,7 +13,7 @@
             placeholder="Username"
             rules="required"
           />
-          <ErrorMessage name="username" v-slot="{ message }">
+          <ErrorMessage v-slot="{ message }" name="username">
             <div class="mt-1 text-danger small">{{ message }}</div>
           </ErrorMessage>
         </div>
@@ -27,7 +27,7 @@
             placeholder="Password"
             rules="required|min:6"
           />
-          <ErrorMessage name="password" v-slot="{ message }">
+          <ErrorMessage v-slot="{ message }" name="password">
             <div class="mt-1 text-danger small">{{ message }}</div>
           </ErrorMessage>
         </div>
@@ -35,7 +35,7 @@
           <button type="submit">Submit</button>
         </div>
       </Form>
-      <div class="col-12" v-if="error">
+      <div v-if="error" class="col-12">
         <div
           :class="{
             'alert alert-success': isSuccess,

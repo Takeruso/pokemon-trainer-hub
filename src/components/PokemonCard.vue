@@ -20,26 +20,26 @@
           <p class="card-text">❤️ {{ local.likes }} Likes</p>
         </div>
 
-        <div class="col-12" v-if="!editing">
-          <button @click="handleLike" class="btn btn-outline-primary me-2">
+        <div v-if="!editing" class="col-12">
+          <button class="btn btn-outline-primary me-2" @click="handleLike">
             👍 Like
           </button>
-          <button @click="startEdit" class="btn btn-outline-warning me-2">
+          <button class="btn btn-outline-warning me-2" @click="startEdit">
             ✏️ Edit
           </button>
           <button
-            @click="$emit('delete', local.id)"
             class="btn btn-outline-danger"
+            @click="$emit('delete', local.id)"
           >
             🗑 Delete
           </button>
         </div>
 
-        <div class="col-12" v-else>
-          <button @click="saveEdit" class="btn btn-outline-success me-2">
+        <div v-else class="col-12">
+          <button class="btn btn-outline-success me-2" @click="saveEdit">
             💾 Save
           </button>
-          <button @click="cancelEdit" class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" @click="cancelEdit">
             ❌ Cancel
           </button>
         </div>
