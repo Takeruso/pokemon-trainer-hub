@@ -1179,40 +1179,26 @@ nav .logout-button:hover::after {
   color: #1f2937;
 }
 
+/* モバイル時の Login/Signup を強制センタリング */
+@media (max-width: 600px) {
+  .container.login-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 20px 0 !important;
+  }
 
-.auth-section {
-  max-width: 480px;
-  margin: 0 auto;
-}
+  .login-container form {
+    width: 90% !important;
+    max-width: 350px !important;
+    margin: 0 auto !important;
+  }
 
-.auth-card {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(37, 99, 235, 0.45);
-  border-radius: 18px;
-  padding: 24px 20px;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.05),
-    0 6px 12px rgba(0, 0, 0, 0.12);
-}
-
-.auth-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 16px;
-  color: #1f2937;
-}
-
-/* 入力欄を中央 & フル幅にする */
-.auth-form {
-  max-width: 320px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.auth-form input,
-.auth-form button {
-  width: 100%;
+  .login-container input,
+  .login-container button {
+    width: 100% !important;
+    margin-bottom: 12px !important;
+  }
 }

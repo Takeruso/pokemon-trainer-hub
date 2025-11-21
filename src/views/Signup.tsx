@@ -42,7 +42,7 @@ function Signup() {
   }
 
   return (
-    <div className="container">
+    <div className="container login-container">
       <div className="row justify-content-center">
         <div className="col-12 mt-3 text-center">
           <h2>Sign Up</h2>
