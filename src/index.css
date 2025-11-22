@@ -1028,7 +1028,7 @@ img {
 }
 
 /* -----------------------------------------
-   NAV LINKS — これだけで a も button も統一
+   NAV LINKS — Unify both a and button with this
 ------------------------------------------ */
 .nav-link {
   display: inline-block;
@@ -1047,7 +1047,7 @@ img {
 
   border-bottom: 2px solid transparent;
 }
-/* 下線アニメーション */
+/* Underline animation */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -1065,7 +1065,7 @@ img {
 .nav-link.active::after {
   width: 100%;
 }
-/* active 状態（React Router が .active を付与） */
+/* active state (React Router adds .active) */
 .nav-link.active {
   color: var(--secondary-color);
   border-bottom: 2px solid var(--secondary-color);
@@ -1076,7 +1076,7 @@ img {
   font-size: 0.8em;
 }
 
-/* Logout 専用：特別処理が必要なら追加 */
+/* Logout only: Add if special processing is required */
 .nav-logout {
   color: var(--primary-color);
   font-weight: bold;
@@ -1131,7 +1131,7 @@ nav .logout-button:hover::after {
 
 .auth-button:hover {
   transform: scale(1.05);
-  background-color: #2447a3; /* 好きに調整 */
+  background-color: #2447a3;
 }
 
 @media (min-width: 768px) {
@@ -1148,13 +1148,13 @@ nav .logout-button:hover::after {
 /* === React version layout overrides === */
 
 .content-wrapper {
-  /* 背景の上に乗るメインの箱を中央に固定 */
+  /* Center the main box on top of the background */
   max-width: 960px;
   margin: 0 auto;
   padding: 32px 16px 48px;
 }
 
-/* モバイル時の Login/Signup を強制センタリング */
+/* Force center alignment for Login/Signup on mobile */
 @media (max-width: 600px) {
   .container.login-container {
     display: flex !important;
@@ -1174,6 +1174,7 @@ nav .logout-button:hover::after {
   .login-container input,
   .login-container button {
     width: 100% !important;
-    margin-bottom: 12px !important;
+    margin: 0 0 12px 0 !important;
+    box-sizing: border-box;
   }
 }

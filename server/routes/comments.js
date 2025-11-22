@@ -4,7 +4,7 @@ import Comment from '../models/Comment.js';
 
 const router = express.Router();
 
-// GET /api/comments  全コメント取得
+// GET /api/comments  Get all comments
 router.get('/', async (req, res) => {
   try {
     const comments = await Comment.find().sort({ _id: -1 });
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST /api/comments  新規コメント作成
+// POST /api/comments  Create a new comment
 router.post('/', async (req, res) => {
   try {
     const { name, comment, likes } = req.body;
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /api/comments/:id  コメント更新
+// PUT /api/comments/:id  Update a comment
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -60,7 +60,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/comments/:id  コメント削除
+// DELETE /api/comments/:id  Delete a comment
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -70,7 +70,7 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Comment not found' });
     }
 
-    // フロント側は 204 No Content を想定している
+    // The front end expects a 204 No Content response.
     res.status(204).end();
   } catch (err) {
     console.error(err);

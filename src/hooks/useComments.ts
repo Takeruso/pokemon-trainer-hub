@@ -19,8 +19,8 @@ export function useComments() {
         setLoading(true);
         const all = await getAllComments();
 
-        // ⚠ サンプルデータ注入は本来サーバー側の責務
-        // 課題の都合でフロントでやるなら、ここに残す
+        //  ⚠ Sample data injection is inherently the server's responsibility.
+        // If done on the front end due to project constraints, keep it here
         if (all.length === 0) {
           const sampleData: Omit<Comment, '_id'>[] = [
             {

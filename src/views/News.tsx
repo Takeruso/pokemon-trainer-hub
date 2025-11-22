@@ -54,7 +54,6 @@ function News() {
     return [...new Set(dates)];
   }, [newsList]);
 
-
   const resetFilters = () => {
     setSearchTitle('');
     setSearchContent('');

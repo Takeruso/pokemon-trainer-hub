@@ -1,116 +1,127 @@
 # Pokémon Trainer Hub
 
-A small full-stack demo application built with React + TypeScript, Express, and MongoDB Atlas. Originally a university assignment using Vue + IndexedDB, this project was rewritten from scratch to practice:
+A full-stack demo application built to practice real-world fundamentals: REST API design, authentication with hashed passwords, connecting a React frontend to MongoDB Atlas, and deploying both sides to production (Netlify + Render).
 
-- building a real backend API
-- implementing authentication with hashed passwords
-- connecting a frontend to a cloud database
-- deploying a full stack app (Netlify + Render)
+Live Demo: https://lambent-dodol-53c843.netlify.app  
+API: https://pokemon-trainer-hub.onrender.com/api
 
-This repository represents my first full-stack project with an actual server + database, built to strengthen my fundamentals and portfolio.
+---
 
-## 🚀 Live Demo
+## 🚀 Features
 
-Frontend (Netlify) https://lambent-dodol-53c843.netlify.app
+- Authentication
+  - Username/password signup & login
+  - Server-side validation with bcrypt hashing
+  - Local session state (localStorage)
+- Comments Dashboard
+  - Create / Edit / Delete / Like
+  - MongoDB Atlas storage with Mongoose
+  - Search filter with controlled inputs
+  - Full CRUD connection between frontend and backend
+- Pokémon Viewer
+  - Live data from the public PokéAPI
+  - Pokémon name, sprite, types
+  - Client-side pagination & loading states
+- News Page
+  - Local JSON feed rendered as article list
+  - Simulates a lightweight CMS integration
 
-Backend API (Render) https://pokemon-trainer-hub.onrender.com/api
+---
 
-### Demo Account
+## 🏗️ Architecture Overview
 
-```
-username: demo
-password: demo123
-```
+![Pokemon Trainer Hub architecture](./docs/architecture.svg)
 
-## 🧰 Tech Stack
+The app follows a simple flow: React views call custom hooks, hooks use a small API client to talk to the Express backend, and the backend uses Mongoose models to read/write data in MongoDB Atlas.
 
-### Frontend
+## 🧠 Design Decisions
+
+### Custom Hooks (useAuth, useComments)
+
+- Separates UI from behavior
+- Keeps pages declarative
+- Centralizes auth & comments logic
+
+### API Layer (src/api)
+
+- Prevents components from calling endpoints directly
+- Centralizes fetch logic and base URL handling
+- Mirrors real-world frontend architecture
+
+### Data Models (Mongoose)
+
+- User: username + hashed password
+- Comment: name, text, likes
+- Simple schemas to focus on CRUD fundamentals
+
+### Reasoning Behind These Choices
+
+- Express: simple, explicit control over auth logic
+- bcrypt: secure password hashing without JWT yet (scope control)
+- MongoDB Atlas: easy hosted DB for a small demo
+- React + Vite: fast dev cycle and type-safe UI
+- Netlify + Render: separation of concerns + free-tier reproducibility
+
+---
+
+## 🖥 Frontend Tech Stack
+
 - React 18 + TypeScript
-- Vite
 - Custom hooks (useAuth, useComments)
-- CSS (no UI frameworks)
+- Fetch wrapper modules under `src/api`
+- Minimal CSS + reusable card components
 
-### Backend
+## 🛠 Backend Tech Stack
+
 - Node.js + Express
-- Mongoose (MongoDB Atlas)
-- bcrypt (password hashing)
+- Mongoose models (User, Comment)
+- Bcrypt password hashing
+- REST endpoints for auth + comments
 
-### External API
-- PokéAPI — used directly from the frontend
-- Local JSON feed — for the News page
-
-## ✨ Features
-
-### 🔐 Authentication
-- Signup & login using bcrypt hashed passwords
-- Basic session state stored in localStorage
-- Simplified for demo purposes (no JWT yet)
-
-### 💬 Comments Dashboard
-- Create / Edit / Delete / Like comments
-- Stored in MongoDB Atlas
-- Live search filter
-- Fully connected CRUD between frontend and backend
-
-### 🔎 Pokémon Viewer
-- Fetches Pokémon data (name, sprite, types) from PokéAPI
-- Client-side rendering with loading & error states
-
-### 📰 News Page
-- Renders articles from a local JSON dataset
-- Simulates a small CMS integration
+---
 
 ## 📦 Project Structure
-```
+
+```text
 pokemon-trainer-hub/
-├── server/                      # Express backend
-│   ├── models/                  # Mongoose schemas
-│   ├── routes/                  # Login/signup + comments API
+├── server/
+│   ├── models/
+│   ├── routes/
 │   └── server.js
-├── src/                         # React frontend
-│   ├── api/                     # Fetch wrappers
-│   ├── components/              # Reusable UI
-│   ├── hooks/                   # useAuth / useComments
-│   ├── views/                   # Pages (Dashboard, Login, etc.)
+├── src/
+│   ├── api/
+│   ├── components/
+│   ├── hooks/
+│   ├── views/
 │   └── App.tsx
-├── public/
-└── package.json
+└── public/
 ```
 
-## 🔧 API Overview
+---
+
+## 🔧 API Endpoints
 
 ### Auth
-```
-POST /api/auth/register
-POST /api/auth/login
-```
+
+- `POST /api/auth/register` — Register new user
+- `POST /api/auth/login` — Login user
 
 ### Comments
-```
-GET    /api/comments
-POST   /api/comments
-PUT    /api/comments/:id
-DELETE /api/comments/:id
-```
-(PokéAPI is called directly from the frontend.)
 
-## 🔑 Environment Variables
+- `GET    /api/comments` — List comments
+- `POST   /api/comments` — Create a comment
+- `PUT    /api/comments/:id` — Update a comment
+- `DELETE /api/comments/:id` — Delete a comment
 
-### Frontend (.env)
-```
-VITE_API_BASE=https://pokemon-trainer-hub.onrender.com/api
-```
+> Note: The PokéAPI is called directly from the frontend.
 
-### Backend (.env)
-```
-MONGO_URI=your-atlas-uri
-PORT=3000
-```
+---
 
 ## 🛠 Running Locally
 
 ### Backend
-```
+
+```bash
 cd server
 npm install
 cp .env.example .env
@@ -118,37 +129,64 @@ npm run dev
 ```
 
 ### Frontend
-```
+
+```bash
+# from repo root
 npm install
 npm run dev
 ```
 
-## 📱 Responsive Notes
-The layout uses minimal responsive rules. Major screens (Login / Dashboard / Pokémon) are tested on mobile and remain readable.
+---
 
-## ⚠️ Limitations (By Design)
-This is a learning project, so the architecture is intentionally simple:
+## 🔑 Env Vars
 
-- No JWT or session middleware yet
-- No role-based authorization
-- Error handling is minimal
-- No pagination for comments
-- CSS is basic (no UI framework)
+Frontend
 
-Future version will extend these.
+- VITE_API_BASE=your-api-url
 
-## 🎯 Purpose
-This project demonstrates:
+Backend
 
-- understanding of React + TypeScript fundamentals
-- ability to design & consume REST APIs
-- handling auth (bcrypt hashing)
-- connecting a frontend to MongoDB Atlas
-- deploying a complete full stack app
+- MONGO_URI=your-atlas-uri
+- PORT=3000
 
-It is intended as a portfolio sample rather than a production system.
+---
 
-## 📬 Contact
-If you want to discuss the project or collaboration:
+## 📈 Roadmap
 
-GitHub: https://github.com/Takeruso
+- JWT-based authentication
+- Comment pagination
+- Improved error boundaries
+- Role-based permissions
+- Component-level refactor using shadcn/UI or Tailwind
+
+---
+
+## 📸 Screenshots
+
+### Home
+
+![Home](./docs/screens/home.png)
+
+### News
+
+![News](./docs/screens/news.png)
+
+### About
+
+![About](./docs/screens/about.png)
+
+### Login
+
+![Login](./docs/screens/login.png)
+
+### Signup
+
+![Signup](./docs/screens/signup.png)
+
+### Dashboard
+
+![Dashboard](./docs/screens/dashboard.png)
+
+### Pokemon
+
+![Pokemon](./docs/screens/pokemon.png)

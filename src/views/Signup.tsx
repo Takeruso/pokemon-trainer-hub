@@ -48,29 +48,29 @@ function Signup() {
           <h2>Sign Up</h2>
         </div>
 
-      <div className="col-12 d-flex justify-content-center">
-        <FormWrapper onSubmit={handleSignup}>
-          <FormInput
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            error={errors.username}
-          />
+        <div className="col-12 d-flex justify-content-center">
+          <FormWrapper onSubmit={handleSignup}>
+            <FormInput
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              error={errors.username}
+            />
 
-          <FormInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-          />
+            <FormInput
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+            />
 
-          <div className="mb-3">
-            <button type="submit">Submit</button>
-          </div>
-        </FormWrapper>
+            <div className="mb-3">
+              <button type="submit">Submit</button>
+            </div>
+          </FormWrapper>
         </div>
 
         <div className="col-12">
