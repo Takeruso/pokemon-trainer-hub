@@ -1178,3 +1178,20 @@ nav .logout-button:hover::after {
     box-sizing: border-box;
   }
 }
+
+.login-container button {
+  padding: 14px 0 !important;  
+}
+
+/* CommentCard 全体を中央揃えに */
+.comment-card .card-body {
+  text-align: center;
+}
+
+/* CommentCard 内のボタンは「縦・幅揃え」にする */
+.comment-card .btn {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto 12px;   /* 中央寄せ + 下側だけ余白 */
+}
