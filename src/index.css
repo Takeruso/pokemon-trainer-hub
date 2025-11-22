@@ -1180,18 +1180,18 @@ nav .logout-button:hover::after {
 }
 
 .login-container button {
-  padding: 14px 0 !important;  
+  padding: 14px 0 !important;
 }
 
-/* CommentCard 全体を中央揃えに */
+/* CommentCard center align the entire text */
 .comment-card .card-body {
   text-align: center;
 }
 
-/* CommentCard 内のボタンは「縦・幅揃え」にする */
+/* Set the buttons in the CommentCard to “vertical and width alignment”. */
 .comment-card .btn {
   display: block;
   width: 100%;
   max-width: 260px;
-  margin: 0 auto 12px;   /* 中央寄せ + 下側だけ余白 */
+  margin: 0 auto 12px; /* Centered + bottom margin only */
 }

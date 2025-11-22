@@ -16,3 +16,7 @@ pnpm-debug.log*
 .vscode/
 .idea/
 *.swp
+
+server/node_modules/
+server/.env
+server/package-lock.json

@@ -128,6 +128,10 @@ cp .env.example .env
 npm run dev
 ```
 
+The API server runs at:
+
+http://localhost:3000
+
 ### Frontend
 
 ```bash
@@ -135,6 +139,11 @@ npm run dev
 npm install
 npm run dev
 ```
+
+The frontend runs at:
+
+http://localhost:5173
+(Vite default)
 
 ---
 
