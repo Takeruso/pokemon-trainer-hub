@@ -1,8 +1,13 @@
 # Pokémon Trainer Hub
 
-A full-stack demo application built to practice real-world fundamentals: REST API design, authentication with hashed passwords, connecting a React frontend to MongoDB Atlas, and deploying both sides to production (Netlify + Render).
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Takeruso_pokemon-trainer-hub&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Takeruso_pokemon-trainer-hub)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Takeruso_pokemon-trainer-hub&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Takeruso_pokemon-trainer-hub)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Takeruso_pokemon-trainer-hub&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Takeruso_pokemon-trainer-hub)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Takeruso_pokemon-trainer-hub&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Takeruso_pokemon-trainer-hub)
 
-Live Demo: https://pokemon-trainer-hub-demo.netlify.app  
+A full-stack demo application built to practice real-world fundamentals: REST API design, authentication with hashed passwords, connecting a React frontend to MongoDB Atlas, and deploying both sides to production (Vercel + Render).
+
+Live Demo: https://pokemon-trainer-hub.vercel.app  
 API: https://pokemon-trainer-hub.onrender.com/api
 
 ---
@@ -60,7 +65,7 @@ The app follows a simple flow: React views call custom hooks, hooks use a small 
 - bcrypt: secure password hashing without JWT yet (scope control)
 - MongoDB Atlas: easy hosted DB for a small demo
 - React + Vite: fast dev cycle and type-safe UI
-- Netlify + Render: separation of concerns + free-tier reproducibility
+- Vercel + Render: separation of concerns + free-tier reproducibility
 
 ---
 
