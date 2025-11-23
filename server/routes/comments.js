@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     const doc = await Comment.create({
       name: String(name),
       comment: String(comment)  ,
-      likes: likes ?? 0,
+      likes:Number(likes) || 0,
     });
 
     res.status(201).json(doc);
