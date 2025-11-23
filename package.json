@@ -39,14 +39,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Takeruso/weather.git"
+    "url": "git+https://github.com/Takeruso/pokemon-trainer-hub.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Takeruso/weather/issues"
+    "url": "https://github.com/Takeruso/pokemon-trainer-hub/issues"
   },
-  "homepage": "https://github.com/Takeruso/weather#readme",
+  "homepage": "https://github.com/Takeruso/pokemon-trainer-hub#readme",
   "description": ""
 }
