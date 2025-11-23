@@ -15,6 +15,16 @@ function Pokemon() {
   const [error, setError] = useState('');
   const itemsPerPage = 6;
 
+  const fetchPokemonDetail = async (item: { name: string; url: string }) => {
+    const res = await fetch(item.url);
+    const details = await res.json();
+    return {
+      name: item.name,
+      image: details.sprites.front_default,
+      type: details.types.map((t: any) => t.type.name).join(', '),
+    };
+  };
+
   // ① Load all Pokémon once on mount
   useEffect(() => {
     async function loadAll() {
@@ -25,24 +35,12 @@ function Pokemon() {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
         const data = await res.json();
 
-        const detailedData: PokemonData[] = await Promise.all(
-          data.results.map(async (item: { name: string; url: string }) => {
-            const res = await fetch(item.url);
-            const details = await res.json();
-            return {
-              name: item.name,
-              image: details.sprites.front_default,
-              type: details.types
-                .map((t: { type: { name: string } }) => t.type.name)
-                .join(', '),
-            };
-          }),
-        );
+        // ここでさっき作った関数を呼ぶだけ
+        const detailedData = await Promise.all(data.results.map(fetchPokemonDetail));
 
         setPokemons(detailedData);
       } catch (err) {
-        console.error('Failed to fetch Pokémon data:', err);
-        setError('Failed to load Pokémon. Please try again later.');
+        setError('Failed to load Pokémon');
       } finally {
         setLoading(false);
       }
@@ -50,7 +48,7 @@ function Pokemon() {
 
     loadAll();
   }, []);
-
+  
   // ② Reset page to 1 when search query changes
   useEffect(() => {
     setCurrentPage(1);
