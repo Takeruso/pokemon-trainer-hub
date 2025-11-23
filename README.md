@@ -2,7 +2,7 @@
 
 A full-stack demo application built to practice real-world fundamentals: REST API design, authentication with hashed passwords, connecting a React frontend to MongoDB Atlas, and deploying both sides to production (Netlify + Render).
 
-Live Demo: https://pokemon-trainer-hub-demo.netlify.app
+Live Demo: https://pokemon-trainer-hub-demo.netlify.app  
 API: https://pokemon-trainer-hub.onrender.com/api
 
 ---
