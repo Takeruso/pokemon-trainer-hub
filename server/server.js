@@ -12,6 +12,7 @@ import commentsRouter from './routes/comments.js';
 dotenv.config();
 
 const app = express();
+app.disable('x-powered-by');
 
 // Middleware
 app.use(cors());
