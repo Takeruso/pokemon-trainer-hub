@@ -72,10 +72,8 @@ function Login() {
       ? 'success'
       : status === 'invalid'
         ? 'warning'
-        : status === 'server-error' || status === 'network-error'
-          ? 'danger'
-          : 'danger';
-
+        : 'danger';
+        
   return (
     <div className="container login-container">
       <div className="row">

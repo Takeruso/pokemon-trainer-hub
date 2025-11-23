@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import ExpressMongoSanitize from 'express-mongo-sanitize';
 
 import authRouter from './routes/auth.js';
 import commentsRouter from './routes/comments.js';
@@ -15,6 +16,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(ExpressMongoSanitize());
 
 // Environment variables
 const MONGO_URI = process.env.MONGO_URI;

@@ -123,7 +123,7 @@ function Pokemon() {
                   <h3>{capitalize(pokemon.name)}</h3>
                   <img
                     src={pokemon.image}
-                    alt={`${pokemon.name} image`}
+                    alt={pokemon.name}
                     className="pokemon-image"
                   />
                   <p className="pokemon-type">Type: {pokemon.type}</p>

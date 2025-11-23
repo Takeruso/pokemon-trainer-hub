@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     const comments = await Comment.find().sort({ _id: -1 });
     res.json(comments);
   } catch (err) {
-    console.error(err);
+    console.error('Fetch comments error:', err.message);
     res.status(500).json({ message: 'Failed to fetch comments' });
   }
 });
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json(doc);
   } catch (err) {
-    console.error(err);
+    console.error('Add comment error:', err.message);
     res.status(500).json({ message: 'Failed to add comment' });
   }
 });
@@ -55,7 +55,7 @@ router.put('/:id', async (req, res) => {
 
     res.json(updated);
   } catch (err) {
-    console.error(err);
+    console.error('Update comment error:', err.message);
     res.status(500).json({ message: 'Failed to update comment' });
   }
 });
@@ -73,7 +73,7 @@ router.delete('/:id', async (req, res) => {
     // The front end expects a 204 No Content response.
     res.status(204).end();
   } catch (err) {
-    console.error(err);
+    console.error('Delete comment error:', err.message);
     res.status(500).json({ message: 'Failed to delete comment' });
   }
 });
