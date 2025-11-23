@@ -35,11 +35,11 @@ function Pokemon() {
         const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
         const data = await res.json();
 
-        // ここでさっき作った関数を呼ぶだけ
         const detailedData = await Promise.all(data.results.map(fetchPokemonDetail));
 
         setPokemons(detailedData);
       } catch (err) {
+        console.error(err);
         setError('Failed to load Pokémon');
       } finally {
         setLoading(false);
@@ -48,7 +48,7 @@ function Pokemon() {
 
     loadAll();
   }, []);
-  
+
   // ② Reset page to 1 when search query changes
   useEffect(() => {
     setCurrentPage(1);
